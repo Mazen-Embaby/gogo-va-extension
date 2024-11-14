@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "Gogo VA",
+    "version": "1.0",
+    "description": "A Chrome extension for VA.",
+    "permissions": ["scripting", "activeTab", "storage"],
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"],
+        "css": ["style.css"]
+      }
+    ],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "48": "images/icon48.png"
+      }
+    },
+    "icons": {
+        "48": "images/icon48.png"
+    }
+  }
+  

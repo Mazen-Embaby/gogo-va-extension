@@ -1,0 +1,26 @@
+.grammar-check-icon {
+    font-size: 16px;
+    color: #007bff;
+    opacity: 0.8;
+}
+
+.grammar-check-wrapper {
+    display: inline-block;
+    position: relative;
+}
+
+.suggestions-popup {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 8px;
+    max-width: 300px;
+    position: absolute;
+    z-index: 1000;
+}
+
+.suggestion {
+    padding: 4px;
+    font-size: 14px;
+    color: #333;
+}
