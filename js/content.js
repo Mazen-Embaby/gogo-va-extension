@@ -1,3 +1,18 @@
+// Function to replace text in the active input field.
+function replaceText(inputElement, correctedText) {
+  // Get the active element
+  const activeElement = inputElement;
+
+  // Check if the active element is a text input or textarea
+  if (
+    activeElement &&
+    (activeElement.tagName.toLowerCase() === "input" ||
+      activeElement.tagName.toLowerCase() === "textarea")
+  ) {
+    activeElement.value = correctedText;
+  }
+}
+
 // Add the "check" icon to all text fields
 function processOfTextField(inputElement) {
   // Event listener for input change
@@ -22,6 +37,7 @@ function addIcon(inputElement) {
   // Event listener for icon click
   icon.addEventListener("click", () => {
     checkGrammar(inputElement);
+    replaceText(inputElement, "changed to this");
   });
 
   // Wrap input field in a container
