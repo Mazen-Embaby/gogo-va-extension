@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "Gogo VA",
+  "version": "0.2",
+  "description": "A Chrome extension built with Angular and TypeScript for VA.",
+  "minimum_chrome_version": "131",
+  "permissions": [
+    "activeTab",
+    "webNavigation",
+    "storage",
+    "scripting",
+    "sidePanel",
+    "aiLanguageModelOriginTrial",
+    "contextMenus"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["app/content.js"],
+      "css": ["style.css"]
+    }
+  ],
+  "background": {
+    "service_worker": "app/service_worker.js"
+  },
+
+  "side_panel": {
+    "default_path": "index.html"
+  },
+  "action": {
+    "default_title": "Open Gogo VA",
+    "default_icon": {
+      "48": "assets/images/icon48.png"
+    }
+  },
+  "icons": {
+    "48": "assets/images/icon48.png"
+  }
+}

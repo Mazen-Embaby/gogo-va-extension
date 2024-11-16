@@ -1,5 +1,5 @@
 // Function to replace text in the active input field.
-function replaceText(inputElement, correctedText) {
+function replaceText(inputElement: HTMLInputElement | HTMLTextAreaElement, correctedText: string): void {
   // Get the active element
   const activeElement = inputElement;
 
@@ -14,13 +14,13 @@ function replaceText(inputElement, correctedText) {
 }
 
 // Add the "check" icon to all text fields
-function processOfTextField(inputElement) {
+function processOfTextField(inputElement: HTMLTextAreaElement): void {
   // Event listener for input change
   inputElement.addEventListener("input", handleTyping);
   addIcon(inputElement);
 }
 
-function addIcon(inputElement) {
+function addIcon(inputElement: HTMLTextAreaElement): void {
   const icon = document.createElement("span");
   icon.className = "grammar-check-icon";
   // icon.innerText = "✓";
@@ -44,28 +44,33 @@ function addIcon(inputElement) {
   const wrapper = document.createElement("div");
   wrapper.className = "grammar-check-wrapper";
   wrapper.style.position = "relative";
-  inputElement.parentNode.insertBefore(wrapper, inputElement);
-  wrapper.appendChild(inputElement);
-  wrapper.appendChild(icon);
+
+  const parent = inputElement.parentNode;
+  if (parent) {
+    parent.insertBefore(wrapper, inputElement);
+    wrapper.appendChild(inputElement);
+    wrapper.appendChild(icon);
+  }
 }
 
 // Function to handle input events in text areas
-function handleTyping(event) {
-  const textContent = event.target.value;
-  console.log("User is typing:", textContent);
+function handleTyping(event: Event): void {
+  const target = event.target as HTMLTextAreaElement;
+  const textContent = target.value;
+  console.log("User type:", textContent);
 
   // Optional: Trigger grammar check or other actions
-  // checkGrammar(event.target);
+  // checkGrammar(target);
 }
 
 // Check grammar using gemini
-async function checkGrammar(inputElement) {
+async function checkGrammar(inputElement: HTMLTextAreaElement): Promise<void> {
   const text = inputElement.value;
   console.debug(`checkGrammar func ${text}`);
 }
 
 // Show suggestions in a popup near the text field
-function showSuggestions(inputElement, matches) {
+function showSuggestions(inputElement: HTMLTextAreaElement, matches: Array<{ message: string; replacements: { value: string }[] }>): void {
   const popup = document.createElement("div");
   popup.className = "suggestions-popup";
 
@@ -88,11 +93,21 @@ function showSuggestions(inputElement, matches) {
 }
 
 // Inject icons into all text fields on the page
-function injectIcons() {
-  console.debug("inject func");
-  const textFields = document.querySelectorAll("input[type='text'], textarea");
+function injectIcons(): void {
+  console.debug("inject funcc");
+  const textFields = document.querySelectorAll("textarea");
 
-  textFields.forEach(processOfTextField);
+  textFields.forEach((textField) => processOfTextField(textField as HTMLTextAreaElement));
 }
 
-document.addEventListener("DOMContentLoaded", injectIcons());
+function requestFocus(activeElement: HTMLElement): void {
+  // Check if the active element is a text input or textarea
+  if (activeElement && activeElement.tagName.toLowerCase() === "textarea") {
+    (activeElement as HTMLTextAreaElement).value = "correctedText";
+  }
+}
+
+// document.addEventListener("onload", injectIcons);
+window.onload = injectIcons;
+
+// document.addEventListener("focusin", injectIcons);

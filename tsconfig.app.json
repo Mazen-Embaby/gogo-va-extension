@@ -1,0 +1,19 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+// "outDir": "./out-tsc/app",
+
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "types": ["chrome"]
+  },
+  "files": [
+    "src/main.ts",
+    "src/app/service_worker.ts",
+    "src/app/content.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts"
+  ]
+}
