@@ -17,12 +17,11 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["app/content.js"],
-      "css": ["style.css"]
+      "js": ["app/content.js"]
     }
   ],
   "background": {
-    "service_worker": "app/service_worker.js"
+    "service_worker": "app/background.js"
   },
 
   "side_panel": {

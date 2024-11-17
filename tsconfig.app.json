@@ -10,7 +10,7 @@
   },
   "files": [
     "src/main.ts",
-    "src/app/service_worker.ts",
+    "src/app/background.ts",
     "src/app/content.ts"
   ],
   "include": [
