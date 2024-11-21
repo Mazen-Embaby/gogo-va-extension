@@ -1,0 +1,27 @@
+<!-- <div
+  class="flex"
+  [ngClass]="{ 'justify-end': isUser, 'justify-start': !isUser }"
+>
+  <div
+    class="px-4 py-2 rounded-lg"
+    [ngClass]="{
+      'bg-blue-500 text-white': isUser,
+      'bg-gray-300 text-black': !isUser
+    }"
+  >
+    {{ message.text }}
+  </div>
+</div> -->
+
+
+<app-chat-bubble
+  [variant]="'received'"
+  [layout]="'default'"
+  [avatarSrc]="'path/to/avatar.jpg'"
+  [avatarFallback]="'A'"
+  [isLoading]="false"
+  [messageContent]="'Hello! This is a chat message.'"
+  [timestamp]="'10:45 AM'"
+  [actionIcon]="'iconSvgString'"
+  [onActionClick]="handleClick"
+></app-chat-bubble>

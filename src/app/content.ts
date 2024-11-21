@@ -94,10 +94,18 @@ function showSuggestions(inputElement: HTMLTextAreaElement, matches: Array<{ mes
 
 // Inject icons into all text fields on the page
 function injectIcons(): void {
-  console.debug("inject funcc");
+  console.debug("inject func");
   const textFields = document.querySelectorAll("textarea");
 
   textFields.forEach((textField) => processOfTextField(textField as HTMLTextAreaElement));
+
+
+
+  // Add Angular app root if not already present
+
+
+
+
 }
 
 function requestFocus(activeElement: HTMLElement): void {

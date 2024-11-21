@@ -1,0 +1,40 @@
+<div [ngClass]="getBubbleClasses()">
+    <!-- Avatar -->
+    <div class="avatar" *ngIf="avatarSrc || avatarFallback">
+      <img *ngIf="avatarSrc" [src]="avatarSrc" alt="Avatar" class="avatar-image" />
+      <div *ngIf="!avatarSrc" class="avatar-fallback">{{ avatarFallback }}</div>
+    </div>
+  
+    <!-- Message -->
+    <div
+      [ngClass]="getMessageClasses()"
+      class="break-words max-w-full whitespace-pre-wrap"
+    >
+      <ng-container *ngIf="isLoading; else messageContentTemplate">
+        <div class="flex items-center space-x-2">
+          <!-- Loading Spinner Placeholder -->
+          <!-- <app-message-loading></app-message-loading> -->
+            loading
+
+        </div>
+      </ng-container>
+      <ng-template #messageContentTemplate>
+        {{ messageContent }}
+      </ng-template>
+    </div>
+  
+    <!-- Action -->
+    <button
+      *ngIf="actionIcon"
+      class="action-button"
+      (click)="onActionClick && onActionClick()"
+    >
+      <span [innerHTML]="actionIcon"></span>
+    </button>
+  
+    <!-- Timestamp -->
+    <div *ngIf="timestamp" class="text-xs mt-2 text-right">
+      {{ timestamp }}
+    </div>
+  </div>
+  

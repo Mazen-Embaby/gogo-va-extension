@@ -1,0 +1,50 @@
+<aside #sideBarDrawer
+    class="fixed top-0 right-0 z-40 h-screen w-16 border-r border-gray-200 bg-white pt-5 transition-transform dark:border-gray-700 dark:bg-gray-800 sm:translate-x-0"
+    aria-label="Sidebar">
+    <div class="h-full overflow-y-auto bg-white pb-4 dark:bg-gray-800">
+        <ul class="space-y-2">
+
+            <li *ngFor="let item of navigationMenu">
+
+                <button type="button" [routerLink]="item.link"
+                    routerLinkActive="bg-indigo-600 text-white hover:bg-indigo-600" (click)="item.isOpen=!item.isOpen"
+                    class="group flex flex-col w-full items-center rounded-md p-2 text-base font-normal text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+
+                    <mat-icon
+                        class="text-gray-500 transition duration-75  dark:text-gray-400 dark:group-hover:text-white"
+                        routerLinkActive="text-white" aria-hidden="false" aria-label="home" [fontIcon]="item.icon">
+                    </mat-icon>
+
+                    <span class="whitespace-nowrap text-sm" sidebar-toggle-item>{{ item.name }}</span>
+                </button>
+
+
+                <ul *ngIf="item.children.length > 0" class="space-y-2 py-2" [ngClass]="{'hidden': !item.isOpen}">
+
+                    <li *ngFor="let child of item.children">
+                        <a class="group flex w-full items-center rounded-lg p-2 pl-11 text-base font-normal text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                            [routerLink]="child.link" routerLinkActive="bg-indigo-600 text-white hover:bg-indigo-600 "
+                            [routerLinkActiveOptions]="{ exact: true }">
+
+                            <span class="material-icons text-gray-500  mr-2 " routerLinkActive="text-white"
+                                [routerLinkActiveOptions]="{ exact: true }">
+                                {{child.icon}}
+                            </span>
+                            {{ child.name }}
+
+                        </a>
+                    </li>
+
+                </ul>
+
+            </li>
+
+
+            <hr />
+
+        </ul>
+
+
+
+    </div>
+</aside>

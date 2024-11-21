@@ -1,0 +1,101 @@
+// Bubble Styles
+.flex {
+    display: flex;
+    gap: 0.5rem;
+    max-width: 60%;
+    align-items: flex-end;
+    position: relative;
+  }
+  .group {
+    position: relative;
+  }
+  .self-start {
+    align-self: start;
+  }
+  .self-end {
+    align-self: end;
+    flex-direction: row-reverse;
+  }
+  .max-w-full {
+    max-width: 100%;
+    width: 100%;
+  }
+  .items-center {
+    align-items: center;
+  }
+  
+  // Avatar Styles
+  .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+  }
+  .avatar-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+  .avatar-fallback {
+    font-size: 0.75rem;
+    color: #fff;
+    background-color: #888;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  // Message Styles
+  .p-4 {
+    padding: 1rem;
+  }
+  .bg-secondary {
+    background-color: #f1f1f1;
+  }
+  .text-secondary-foreground {
+    color: #333;
+  }
+  .bg-primary {
+    background-color: #007bff;
+  }
+  .text-primary-foreground {
+    color: #fff;
+  }
+  .rounded-r-lg {
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+  .rounded-tl-lg {
+    border-radius: 0.5rem 0 0 0.5rem;
+  }
+  .rounded-l-lg {
+    border-radius: 0.5rem 0 0 0.5rem;
+  }
+  .rounded-tr-lg {
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+  // Timestamp Styles
+  .text-xs {
+    font-size: 0.75rem;
+  }
+  .mt-2 {
+    margin-top: 0.5rem;
+  }
+  .text-right {
+    text-align: right;
+  }
+  
+  // Action Button Styles
+  .action-button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

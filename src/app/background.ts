@@ -9,6 +9,14 @@ chrome.action.onClicked.addListener((tab) => {
   chrome.sidePanel.open({ tabId: tab!.id! }, () => {
     console.log('Side Panel Opened');
   });
+
+  // chrome.action.onClicked.addListener((tab) => {
+  //   chrome.scripting.executeScript({
+  //     target: { tabId: tab.id! },
+  //     files: ["inject.js"]
+  //   });
+  // });
+
 });
 
 // background.js

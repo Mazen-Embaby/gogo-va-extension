@@ -1,2 +1,13 @@
-<h1>TITLE OF GGG</h1>>
+<!-- <app-header></app-header> -->
+<div class="flex overflow-hidden h-full w-full bg-white" #mainWindow >
+    <app-sidebar></app-sidebar>
+    <div class="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
+    <!-- <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64 pt-3 sm:ml-64"> -->
 
+    <div id="main-content" class="h-full mr-16 w-full text-right bg-gray-50 relative overflow-y-auto lg:mr-16 pt-3 sm:mr-16">
+
+        <router-outlet></router-outlet>
+
+        <!-- <app-footer></app-footer> -->
+    </div>
+</div>

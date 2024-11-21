@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Gogo VA",
-  "version": "0.2",
+  "version": "0.201",
   "description": "A Chrome extension built with Angular and TypeScript for VA.",
   "minimum_chrome_version": "131",
   "permissions": [
@@ -13,6 +13,7 @@
     "aiLanguageModelOriginTrial",
     "contextMenus"
   ],
+  "trial_tokens": ["Atf3eoMmFTJMWArO2fFyCGkrRweQI4ePXhP428d1ovQozLhfW0HbaEQQDjeZHiMdQZGpZvhJaXDb6V0V+L3lmwcAAAB4eyJvcmlnaW4iOiJjaHJvbWUtZXh0ZW5zaW9uOi8vbGFkbmdvaGFvaWRwZ2dwY25tampuYmplbGNobm9oYmYiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElGb3JFeHRlbnNpb24iLCJleHBpcnkiOjE3NjA0ODYzOTl9"],
 
   "content_scripts": [
     {

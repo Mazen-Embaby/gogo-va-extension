@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TextMonitorComponent } from './text-monitor.component';
+import { SidebarComponent } from './sidebar.component';
 
-describe('TextMonitorComponent', () => {
-  let component: TextMonitorComponent;
-  let fixture: ComponentFixture<TextMonitorComponent>;
+describe('SidebarComponent', () => {
+  let component: SidebarComponent;
+  let fixture: ComponentFixture<SidebarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TextMonitorComponent]
+      declarations: [ SidebarComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TextMonitorComponent);
+    fixture = TestBed.createComponent(SidebarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -6,7 +6,11 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": ["chrome"]
+    "types": ["chrome"],
+    "typeRoots": [
+      "node_modules/@types",
+      "src/types",
+    ],
   },
   "files": [
     "src/main.ts",
