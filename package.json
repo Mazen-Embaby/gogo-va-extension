@@ -11,6 +11,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development && npm run build:ts",
     "test": "ng test",
+    "watch:extension": "ng build --watch --output-hashing=none && tsc src/app/content.ts src/app/background.ts --outDir dist/chrome-extension/browser/app --watch",
     "build:extension": "ng build --output-hashing=none && tsc src/app/content.ts src/app/background.ts --outDir dist/chrome-extension/browser/app",
     "copy-assets": "rsync -av --exclude 'tsconfig.json' --exclude 'src' --exclude 'dist' ./dist/"
   },
