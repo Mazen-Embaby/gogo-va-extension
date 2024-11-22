@@ -1,23 +1,23 @@
 // Allows users to open the side panel by clicking on the action toolbar icon
-// chrome.sidePanel
-//   .setPanelBehavior({ openPanelOnActionClick: true })
-//   .catch((error) => console.error(error));
+chrome.sidePanel
+  .setPanelBehavior({ openPanelOnActionClick: true })
+  .catch((error) => console.error(error));
 
 // When Action Icon is clicked
-chrome.action.onClicked.addListener((tab) => {
-  // Open Side Panel
-  chrome.sidePanel.open({ tabId: tab!.id! }, () => {
-    console.log('Side Panel Opened');
-  });
+// chrome.action.onClicked.addListener((tab) => {
+//   // Open Side Panel
+//   chrome.sidePanel.open({ tabId: tab!.id! }, () => {
+//     console.log('Side Panel Opened');
+//   });
 
-  // chrome.action.onClicked.addListener((tab) => {
-  //   chrome.scripting.executeScript({
-  //     target: { tabId: tab.id! },
-  //     files: ["inject.js"]
-  //   });
-  // });
+//   // chrome.action.onClicked.addListener((tab) => {
+//   //   chrome.scripting.executeScript({
+//   //     target: { tabId: tab.id! },
+//   //     files: ["inject.js"]
+//   //   });
+//   // });
 
-});
+// });
 
 // background.js
 chrome.runtime.onInstalled.addListener(() => {

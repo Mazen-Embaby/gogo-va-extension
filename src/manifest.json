@@ -14,7 +14,23 @@
     "contextMenus"
   ],
   "trial_tokens": ["Atf3eoMmFTJMWArO2fFyCGkrRweQI4ePXhP428d1ovQozLhfW0HbaEQQDjeZHiMdQZGpZvhJaXDb6V0V+L3lmwcAAAB4eyJvcmlnaW4iOiJjaHJvbWUtZXh0ZW5zaW9uOi8vbGFkbmdvaGFvaWRwZ2dwY25tampuYmplbGNobm9oYmYiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElGb3JFeHRlbnNpb24iLCJleHBpcnkiOjE3NjA0ODYzOTl9"],
+  "host_permissions": ["*://*/*"],
 
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "main.js",
+        "styles.css",
+        "polyfills.js",
+        "runtime.js",
+        "assets/**",
+        "app/app.config",   // Add this specific file
+        "app/*",             // Optionally allow all files in the app directory
+        "*"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],

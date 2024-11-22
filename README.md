@@ -25,3 +25,51 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+
+
+## Development
+
+#### Inject component Angular 18
+
+1. To inject an angular component register it first as a web component in `main.ts`
+
+     ```typescript
+     createApplication()
+       .then((app) => {
+         const component = createCustomElement(SimpleComponent, {
+           injector: app.injector,
+         });
+         customElements.define('app-simple', component);
+       })
+       .catch((err) => console.error(err));
+     
+     bootstrapApplication(AppComponent, appConfig).catch((err) =>
+       console.error(err),
+     );
+     ```
+
+     
+
+2. Inject the registered component through the code below 
+
+     ```typescript
+       const webComponentTag = 'app-simple';
+     
+       let componentElement = document.querySelector(webComponentTag);
+     
+       if (!componentElement) {
+         componentElement = document.createElement(webComponentTag);
+         componentElement.id = 'angular-chrome-app';
+         document.body.appendChild(componentElement);
+     
+         // Load Angular's compiled scripts & Inject the Angular main.js script
+         const angularScript = document.createElement('script');
+         angularScript.type = 'module'; // Ensure it's treated as an ES module
+         const moduleUrl = chrome.runtime.getURL('main.js');
+         angularScript.src = moduleUrl;
+         document.body.appendChild(angularScript);
+       }
+     ```
+
+  
