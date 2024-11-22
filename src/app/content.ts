@@ -107,7 +107,9 @@ async function injectIcons(): Promise<void> {
     processOfTextField(textField as HTMLTextAreaElement),
   );
 
-  injectComponent('app-simple');
+  // injectComponent('gogova-simple');
+  injectComponent('gogova-fab');
+
 }
 
 function injectComponent(webComponentTag: string) {

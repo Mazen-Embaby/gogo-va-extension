@@ -7,13 +7,23 @@ import { AppComponent } from './app/app.component';
 import 'zone.js'; // Make sure Zone.js is imported here
 import { SimpleComponent } from './app/components/simple/simple.component';
 import { createCustomElement } from '@angular/elements';
+import { FabComponent } from './app/components/fab/fab.component';
 
 createApplication()
   .then((app) => {
     const component = createCustomElement(SimpleComponent, {
       injector: app.injector,
     });
-    customElements.define('app-simple', component);
+    customElements.define('gogova-simple', component);
+  })
+  .catch((err) => console.error(err));
+
+  createApplication()
+  .then((app) => {
+    const component = createCustomElement(FabComponent, {
+      injector: app.injector,
+    });
+    customElements.define('gogova-fab', component);
   })
   .catch((err) => console.error(err));
 
