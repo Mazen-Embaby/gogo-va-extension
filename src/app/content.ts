@@ -24,35 +24,37 @@ function processOfTextField(inputElement: HTMLTextAreaElement): void {
 }
 
 function addIcon(inputElement: HTMLTextAreaElement): void {
-  const icon = document.createElement('span');
-  icon.className = 'grammar-check-icon';
-  // icon.innerText = "✓";
-  icon.innerText = '✍️'; // You can also use an image or SVG
+  // const icon = document.createElement('span');
+  // icon.className = 'grammar-check-icon';
+  // // icon.innerText = "✓";
+  // icon.innerText = '✍️'; // You can also use an image or SVG
 
-  icon.style.cursor = 'pointer';
+  // icon.style.cursor = 'pointer';
 
-  // Position the icon
-  icon.style.position = 'absolute';
-  icon.style.right = '5px';
-  icon.style.top = '50%';
-  icon.style.transform = 'translateY(-50%)';
+  // // Position the icon
+  // icon.style.position = 'absolute';
+  // icon.style.right = '5px';
+  // icon.style.bottom = '5px';
+  // // icon.style.transform = 'translateY(-50%)';
 
-  // Event listener for icon click
-  icon.addEventListener('click', () => {
-    checkGrammar(inputElement);
-    replaceText(inputElement, 'changed to this');
-  });
+  // // Event listener for icon click
+  // icon.addEventListener('click', () => {
+  //   checkGrammar(inputElement);
+  //   replaceText(inputElement, 'changed to this');
+  // });
 
   // Wrap input field in a container
   const wrapper = document.createElement('div');
   wrapper.className = 'grammar-check-wrapper';
-  wrapper.style.position = 'relative';
+  wrapper.style.position = 'absolute';
 
   const parent = inputElement.parentNode;
+  const webComponentTag = 'gogova-write-assistance';
+
   if (parent) {
     parent.insertBefore(wrapper, inputElement);
     wrapper.appendChild(inputElement);
-    wrapper.appendChild(icon);
+    injectComponentToHTML(webComponentTag, wrapper);
   }
 }
 
@@ -101,37 +103,38 @@ function showSuggestions(
 // Inject icons into all text fields on the page
 async function injectIcons(): Promise<void> {
   console.debug('inject func');
+  injectMainScript();
+  injectComponentToHTML('gogova-fab');
+
   const textFields = document.querySelectorAll('textarea');
 
   textFields.forEach((textField) =>
     processOfTextField(textField as HTMLTextAreaElement),
   );
-
-  // injectComponent('gogova-simple');
-  injectComponent('gogova-fab');
-
 }
 
-function injectComponent(webComponentTag: string) {
-  // Add Angular app root if not already present
+function injectComponentToHTML(
+  webComponentTag: string,
+  dom: Element = document.body,
+) {
+  if (dom) {
+    let componentElement = dom.querySelector(webComponentTag);
 
-  let componentElement = document.querySelector(webComponentTag);
-
-  if (!componentElement) {
-    componentElement = document.createElement(webComponentTag);
-    componentElement.id = 'angular-chrome-app';
-    document.body.appendChild(componentElement);
-
-    // Load Angular's compiled scripts
-    // Inject the Angular main.js script
-    const angularScript = document.createElement('script');
-
-    angularScript.type = 'module'; // Ensure it's treated as an ES module
-    const moduleUrl = chrome.runtime.getURL('main.js');
-    angularScript.src = moduleUrl;
-    // await import(moduleUrl); // Dynamically import the module
-    document.body.appendChild(angularScript);
+    if (!componentElement) {
+      componentElement = document.createElement(webComponentTag);
+      dom.appendChild(componentElement);
+    }
   }
+}
+
+function injectMainScript() {
+  // Load Angular's compiled scripts & Inject the Angular main.js script
+  const angularScript = document.createElement('script');
+  angularScript.type = 'module'; // Ensure it's treated as an ES module
+  const moduleUrl = chrome.runtime.getURL('main.js');
+  angularScript.src = moduleUrl;
+  // await import(moduleUrl); // Dynamically import the module
+  document.body.appendChild(angularScript);
 }
 
 function requestFocus(activeElement: HTMLElement): void {

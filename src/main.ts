@@ -8,6 +8,7 @@ import 'zone.js'; // Make sure Zone.js is imported here
 import { SimpleComponent } from './app/components/simple/simple.component';
 import { createCustomElement } from '@angular/elements';
 import { FabComponent } from './app/components/fab/fab.component';
+import { WriteAssistanceComponent } from './app/components/write-assistance/write-assistance.component';
 
 createApplication()
   .then((app) => {
@@ -24,6 +25,15 @@ createApplication()
       injector: app.injector,
     });
     customElements.define('gogova-fab', component);
+  })
+  .catch((err) => console.error(err));
+
+  createApplication()
+  .then((app) => {
+    const component = createCustomElement(WriteAssistanceComponent, {
+      injector: app.injector,
+    });
+    customElements.define('gogova-write-assistance', component);
   })
   .catch((err) => console.error(err));
 
