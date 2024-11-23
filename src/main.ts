@@ -9,31 +9,31 @@ import { SimpleComponent } from './app/components/simple/simple.component';
 import { createCustomElement } from '@angular/elements';
 import { FabComponent } from './app/components/fab/fab.component';
 import { WriteAssistanceComponent } from './app/components/write-assistance/write-assistance.component';
+import { TextareaFocusDirective } from './app/directives/textarea-focus.directive';
+import { HighlightWrapperComponent } from './app/components/highlight-wrapper/highlight-wrapper.component';
 
 createApplication()
   .then((app) => {
-    const component = createCustomElement(SimpleComponent, {
+    const simpleComponent = createCustomElement(SimpleComponent, {
       injector: app.injector,
     });
-    customElements.define('gogova-simple', component);
-  })
-  .catch((err) => console.error(err));
+    customElements.define('gogova-simple', simpleComponent);
 
-  createApplication()
-  .then((app) => {
-    const component = createCustomElement(FabComponent, {
+    const fabComponent = createCustomElement(FabComponent, {
       injector: app.injector,
     });
-    customElements.define('gogova-fab', component);
-  })
-  .catch((err) => console.error(err));
+    customElements.define('gogova-fab', fabComponent);
 
-  createApplication()
-  .then((app) => {
-    const component = createCustomElement(WriteAssistanceComponent, {
+    const writeAssistanceComponent = createCustomElement(WriteAssistanceComponent, {
       injector: app.injector,
     });
-    customElements.define('gogova-write-assistance', component);
+    customElements.define('gogova-write-assistance', writeAssistanceComponent);
+
+    const highlightWrapperComponent = createCustomElement(HighlightWrapperComponent, {
+      injector: app.injector,
+    });
+    customElements.define('gogova-highlight', highlightWrapperComponent);
+
   })
   .catch((err) => console.error(err));
 

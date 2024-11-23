@@ -18,44 +18,10 @@ function replaceText(
 
 // Add the "check" icon to all text fields
 function processOfTextField(inputElement: HTMLTextAreaElement): void {
-  // Event listener for input change
-  inputElement.addEventListener('input', handleTyping);
-  addIcon(inputElement);
-}
-
-function addIcon(inputElement: HTMLTextAreaElement): void {
-  // const icon = document.createElement('span');
-  // icon.className = 'grammar-check-icon';
-  // // icon.innerText = "✓";
-  // icon.innerText = '✍️'; // You can also use an image or SVG
-
-  // icon.style.cursor = 'pointer';
-
-  // // Position the icon
-  // icon.style.position = 'absolute';
-  // icon.style.right = '5px';
-  // icon.style.bottom = '5px';
-  // // icon.style.transform = 'translateY(-50%)';
-
-  // // Event listener for icon click
-  // icon.addEventListener('click', () => {
-  //   checkGrammar(inputElement);
-  //   replaceText(inputElement, 'changed to this');
-  // });
-
-  // Wrap input field in a container
-  const wrapper = document.createElement('div');
-  wrapper.className = 'grammar-check-wrapper';
-  wrapper.style.position = 'absolute';
-
-  const parent = inputElement.parentNode;
-  const webComponentTag = 'gogova-write-assistance';
-
-  if (parent) {
-    parent.insertBefore(wrapper, inputElement);
-    wrapper.appendChild(inputElement);
-    injectComponentToHTML(webComponentTag, wrapper);
-  }
+  const textParent = inputElement.parentNode;
+  const hightLight = document.createElement('gogova-highlight');
+  textParent?.insertBefore(hightLight, inputElement);
+  hightLight.appendChild(inputElement);
 }
 
 // Function to handle input events in text areas
@@ -146,5 +112,3 @@ function requestFocus(activeElement: HTMLElement): void {
 
 // document.addEventListener("onload", injectIcons);
 window.onload = injectIcons;
-
-// document.addEventListener("focusin", injectIcons);

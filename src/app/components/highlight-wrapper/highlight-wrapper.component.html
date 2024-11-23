@@ -1,0 +1,6 @@
+<!-- <div [appHighlight]="color" style="display: inline-block;"> -->
+<div #divRef [appHighlight]="color" style="display: inline; position: relative;">
+    <ng-content #textAreaRef></ng-content>
+    
+    <span (click)="write()" class="gogova-write-assistance">✍️</span>
+</div>
