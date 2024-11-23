@@ -13,7 +13,9 @@
     "aiLanguageModelOriginTrial",
     "contextMenus"
   ],
-  "trial_tokens": ["Atf3eoMmFTJMWArO2fFyCGkrRweQI4ePXhP428d1ovQozLhfW0HbaEQQDjeZHiMdQZGpZvhJaXDb6V0V+L3lmwcAAAB4eyJvcmlnaW4iOiJjaHJvbWUtZXh0ZW5zaW9uOi8vbGFkbmdvaGFvaWRwZ2dwY25tampuYmplbGNobm9oYmYiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElGb3JFeHRlbnNpb24iLCJleHBpcnkiOjE3NjA0ODYzOTl9"],
+  "trial_tokens": [
+    "Atf3eoMmFTJMWArO2fFyCGkrRweQI4ePXhP428d1ovQozLhfW0HbaEQQDjeZHiMdQZGpZvhJaXDb6V0V+L3lmwcAAAB4eyJvcmlnaW4iOiJjaHJvbWUtZXh0ZW5zaW9uOi8vbGFkbmdvaGFvaWRwZ2dwY25tampuYmplbGNobm9oYmYiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElGb3JFeHRlbnNpb24iLCJleHBpcnkiOjE3NjA0ODYzOTl9"
+  ],
   "host_permissions": ["*://*/*"],
 
   "web_accessible_resources": [
@@ -24,8 +26,8 @@
         "polyfills.js",
         "runtime.js",
         "assets/**",
-        "app/app.config",   // Add this specific file
-        "app/*",             // Optionally allow all files in the app directory
+        "app/app.config", // Add this specific file
+        "app/*", // Optionally allow all files in the app directory
         "*"
       ],
       "matches": ["<all_urls>"]
@@ -47,10 +49,14 @@
   "action": {
     "default_title": "Open Gogo VA",
     "default_icon": {
-      "48": "assets/images/icon48.png"
+      "128": "assets/images/icon128.png"
     }
   },
   "icons": {
-    "48": "assets/images/icon48.png"
+    "512": "assets/images/icon512.png",
+    "128": "assets/images/icon128.png",
+    "48": "assets/images/icon48.png",
+    "32": "assets/images/icon32.png",
+    "16": "assets/images/icon16.png"
   }
 }
