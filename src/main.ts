@@ -9,8 +9,7 @@ import { SimpleComponent } from './app/components/simple/simple.component';
 import { createCustomElement } from '@angular/elements';
 import { FabComponent } from './app/components/fab/fab.component';
 import { WriteAssistanceComponent } from './app/components/write-assistance/write-assistance.component';
-import { TextareaFocusDirective } from './app/directives/textarea-focus.directive';
-import { HighlightWrapperComponent } from './app/components/highlight-wrapper/highlight-wrapper.component';
+import { TextCheckerComponent } from './app/components/text-checker/text-checker.component';
 
 createApplication()
   .then((app) => {
@@ -29,10 +28,10 @@ createApplication()
     });
     customElements.define('gogova-write-assistance', writeAssistanceComponent);
 
-    const highlightWrapperComponent = createCustomElement(HighlightWrapperComponent, {
+    const textCheckerComponent = createCustomElement(TextCheckerComponent, {
       injector: app.injector,
     });
-    customElements.define('gogova-highlight', highlightWrapperComponent);
+    customElements.define('gogova-text-checker', textCheckerComponent);
 
   })
   .catch((err) => console.error(err));

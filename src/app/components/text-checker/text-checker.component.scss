@@ -1,0 +1,44 @@
+.gogova-write-assistance {
+    position: absolute;
+    cursor: pointer;
+    right: 8px;
+    bottom: 8px;
+  }
+  
+  .wrapper{
+
+    
+  }
+  
+  .text-checker {
+    position: absolute;
+    display: inline-block;
+
+    color: transparent; /* Makes the text invisible */
+
+    pointer-events: none;
+    z-index: 1;
+
+    
+    // background-color: rgb(176, 217, 255);
+    top: 0;
+    right: 0;
+  
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  
+
+
+    overflow: hidden;
+    border: 1px solid transparent;
+  
+    text-align: left;
+    // line-height: 1.5; // dynamic
+    // font-family: inherit; // dynamic
+    // font-size: inherit; // dynamic
+    // padding: 10px; // dynamic
+    // width: 100%; // dynamic
+    // height: 100%; // dynamic
+  }
+  

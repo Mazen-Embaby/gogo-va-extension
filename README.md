@@ -28,7 +28,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 
-## Development
+## Development & Contribution
 
 #### Inject component Angular 18
 
@@ -72,4 +72,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
        }
      ```
 
-  
+## Enahncement To Do
+- custom webpack build on watch to serve
+- text-checker:
+  . sync the scroll of textarea to text-checker
+  . click to the propose (suggestion) visiable the cursor
+

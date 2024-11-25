@@ -19,7 +19,7 @@ function replaceText(
 // Add the "check" icon to all text fields
 function processOfTextField(inputElement: HTMLTextAreaElement): void {
   const textParent = inputElement.parentNode;
-  const hightLight = document.createElement('gogova-highlight');
+  const hightLight = document.createElement('gogova-text-checker');
   textParent?.insertBefore(hightLight, inputElement);
   hightLight.appendChild(inputElement);
 }
