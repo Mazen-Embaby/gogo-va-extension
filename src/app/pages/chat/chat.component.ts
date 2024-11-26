@@ -1,13 +1,10 @@
 import {
   Component,
   ElementRef,
-  NgModule,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
-import { CoreMessage, Message } from 'ai';
 import { ChatService } from '../../services/chat.service';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import {
@@ -17,8 +14,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { finalize, from, Observable, ReplaySubject } from 'rxjs';
-import { ChatMockService } from '../../mock-api/chat.mock.service';
 import { ChatMessage } from '../../types/message.interface';
 import { DeepChat } from 'deep-chat';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';

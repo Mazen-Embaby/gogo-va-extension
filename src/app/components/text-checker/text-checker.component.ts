@@ -1,23 +1,14 @@
 import {
-  AfterRenderRef,
   AfterViewInit,
-  ChangeDetectionStrategy,
   Component,
-  ComponentFactoryResolver,
   ComponentRef,
   ContentChild,
-  ContentChildren,
   ElementRef,
-  HostBinding,
   HostListener,
-  Inject,
   Input,
-  OnInit,
-  QueryList,
   Renderer2,
   ViewChild,
   ViewContainerRef,
-  ViewEncapsulation,
 } from '@angular/core';
 import { HighlightDirective } from '../../directives/highlight.directive';
 import { TextCheckerService } from './text-checker.service';

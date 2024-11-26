@@ -28,93 +28,42 @@
     </div>
 
 
-
     <div id="messages" #chatWindow
-    class="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
-    <!-- Loop through messages here -->
-    <div class="chat-message" *ngFor="let message of messages">
-        <div class="flex items-end"
-            [ngClass]="{ 'justify-end': message.role == 'user', 'justify-start': message.role != 'user' }">
-            
-            <!-- Left-side icon for bot -->
-            <div *ngIf="message.role != 'user'"
-                class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-600">
-                🤖
-            </div>
-
-            <!-- Message Bubble -->
-            <!-- Chat Bubble -->
-            <div class="flex  flex-col space-y-2 text-sm max-w-xs mx-2"
-                [ngClass]="{ 'items-end': message.role == 'user', 'items-start': message.role != 'user' }">
-                <div class="p-3 rounded-2xl shadow "
-                    [ngClass]="message.role == 'user' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-800'">
-                    <span class="inline-block text-left">
-                        {{ message.content }}
-                    </span>
-                </div>
-            </div>
-
-            <!-- Right-side icon for user -->
-            <div *ngIf="message.role == 'user'"
-                class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-600">
-                <mat-icon
-                    class="text-sm text-gray-500 transition duration-75 dark:text-gray-400 dark:group-hover:text-white"
-                    fontIcon="person">
-                </mat-icon>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-    <!-- <div id="messages" #chatWindow
         class="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
+        <!-- Loop through messages here -->
         <div class="chat-message" *ngFor="let message of messages">
+            <div class="flex items-end"
+                [ngClass]="{ 'justify-end': message.role === 'user', 'justify-start': message.role !== 'user' }">
 
-            <div class="flex items-end text-left"
-                [ngClass]="{ 'justify-end': message.role=='user', 'justify-start': message.role!='user' }">
-                <div class="flex flex-col space-y-2 text-xs max-w-xs mx-2"
-                    [ngClass]="{ 'order-1 items-end ': message.role=='user', 'order-2 items-start ': message.role!='user' }">
-                    <div class="p-2 rounded-lg"
-                        [ngClass]="message.role=='user' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-black'">
-                        <span class="px-4 py-2 rounded-lg inline-block">
+                <!-- Left-side icon for bot -->
+                <div *ngIf="message.role !== 'user'"
+                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-600">
+                    🤖
+                </div>
+
+                <!-- Message Bubble -->
+                <!-- Chat Bubble -->
+                <div class="flex  flex-col space-y-2 text-sm max-w-xs mx-2"
+                    [ngClass]="{ 'items-end': message.role === 'user', 'items-start': message.role !== 'user' }">
+                    <div class="p-3 rounded-2xl shadow "
+                        [ngClass]="message.role === 'user' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-800'">
+                        <span class="inline-block text-left">
                             {{ message.content }}
-
                         </span>
-                        <div class="text-left space-x-2 px-4">
-
-                            <button [ngClass]="message.role!='user' ? 'bg-slate-50': 'bg-slate-700'"
-                                class="inline-flex items-center justify-center bg-slate-50 whitespace-nowrap rounded-xl text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground size-6">
-                                <mat-icon class="text-sm" aria-label="Example home icon"
-                                    fontIcon="content_copy"></mat-icon>
-                            </button>
-
-
-                            <button [ngClass]="message.role!='user' ? 'bg-slate-50': 'bg-slate-700'"
-                                class="inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground size-6">
-                                <mat-icon class="text-sm" aria-label="Example home icon"
-                                    fontIcon="volume_up"></mat-icon>
-                            </button>
-                        </div>
                     </div>
                 </div>
 
-                <div
-                    class=" text-center justify-center justify-items-center w-6 h-6 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-                    @if(message.role != "user"){
-                    🤖
-                    }
-                    @else {
+                <!-- Right-side icon for user -->
+                <div *ngIf="message.role === 'user'"
+                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-600">
                     <mat-icon
-                        class="text-sm text-gray-500 transition duration-75 mt-2  dark:text-gray-400 dark:group-hover:text-white"
-                        [fontIcon]="'person'">
+                        class="text-sm text-gray-500 transition duration-75 dark:text-gray-400 dark:group-hover:text-white"
+                        fontIcon="person">
                     </mat-icon>
-                    }
-
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
 
     <form class="relative rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring" [formGroup]="form"
@@ -162,23 +111,4 @@
 
     </form>
 
-    <!-- Message Input Section -->
-    <!-- <div class="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
-        <div class="  ">
-
-            <textarea id="message" rows="4"
-                class="mr-14 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Your message..." [(ngModel)]="userInput"></textarea>
-
-
-
-                <div class="absolute right-1 bottom-1 sm:flex">
-                <button type="button" (click)="sendMessage()"
-                    class="bottom-0  mb-2 inline-flex items-center justify-center rounded-lg px-1 py-1 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none">
-                    <mat-icon class="transition duration-75 dark:text-gray-400 dark:group-hover:text-white"
-                        aria-hidden="false" aria-label="Send" [fontIcon]="'send'"></mat-icon>
-                </button>
-            </div>
-        </div>
-    </div> -->
 </div>

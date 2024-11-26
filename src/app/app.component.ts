@@ -18,11 +18,9 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss', '../styles.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent  {
   title = 'gogo-va';
   @ViewChild('mainWindow') private mainWindow!: ElementRef;
-
-  ngOnInit(): void {}
 
   scrollMainWindowToBottom() {
     setTimeout(() => {

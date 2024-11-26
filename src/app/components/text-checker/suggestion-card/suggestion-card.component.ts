@@ -9,7 +9,6 @@ import SuggestionData from '../type/suggestion-data.interface';
   imports: [MatIconModule],
   templateUrl: './suggestion-card.component.html',
   styleUrl: './suggestion-card.component.scss',
-  encapsulation: ViewEncapsulation.ShadowDom
 
 })
 export class SuggestionCardComponent implements OnInit{
@@ -27,7 +26,7 @@ export class SuggestionCardComponent implements OnInit{
   }
 
   getImg(asset: string){
-    console.log(chrome.runtime.id);
+    // console.log(chrome.runtime);
 
     const x = chrome.runtime.getURL(asset);
     return x;

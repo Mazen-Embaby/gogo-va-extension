@@ -13,7 +13,8 @@
     "test": "ng test",
     "watch:extension": "ng build --watch --output-hashing=none && tsc src/app/content.ts src/app/background.ts --outDir dist/chrome-extension/browser/app --watch",
     "build:extension": "ng build --output-hashing=none && tsc src/app/content.ts src/app/background.ts --outDir dist/chrome-extension/browser/app",
-    "copy-assets": "rsync -av --exclude 'tsconfig.json' --exclude 'src' --exclude 'dist' ./dist/"
+    "copy-assets": "rsync -av --exclude 'tsconfig.json' --exclude 'src' --exclude 'dist' ./dist/",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -48,16 +49,20 @@
     "@types/jasmine": "~5.1.0",
     "@types/node": "^22.9.1",
     "@types/webpack": "^5.28.5",
+    "angular-eslint": "18.4.2",
+    "eslint": "^9.15.0",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "prettier": "^3.4.0",
     "prettier-plugin-tailwindcss": "^0.2.8",
     "tailwindcss": "^3.4.15",
     "ts-node": "^10.9.2",
     "typescript": "~5.5.2",
+    "typescript-eslint": "8.15.0",
     "webpack-cli": "^5.1.4",
     "webpack-ext-reloader": "^1.1.13"
   }
