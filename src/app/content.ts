@@ -101,6 +101,19 @@ function injectMainScript() {
   angularScript.src = moduleUrl;
   // await import(moduleUrl); // Dynamically import the module
   document.body.appendChild(angularScript);
+
+
+  // Dynamically inject a hashed CSS file
+  const cssURL = chrome.runtime.getURL('styles.css'); // Adjust based on your hashed filename
+  const linkElement = document.createElement('link');
+  linkElement.rel = 'stylesheet';
+  linkElement.href = cssURL;
+  document.head.appendChild(linkElement);
+
+}
+
+function getURL(url: string) {
+  return chrome.runtime.getURL(url);
 }
 
 function requestFocus(activeElement: HTMLElement): void {

@@ -1,0 +1,28 @@
+.mat-menu-panel {
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+
+  }
+
+  .mat-menu-content {
+    padding: 0 !important;
+  }
+
+
+.mat-mdc-menu-content {
+    padding: 0;
+}
+
+.underline-text {
+    // background-color: #ff00004d ;
+    color: black; /* Makes the text invisible */
+    text-decoration: underline; /* Adds the underline */
+    text-decoration-color: #ff0000ff; /* Sets the underline color */
+    text-decoration-thickness: 1.5px; /* Adjusts the thickness of the underline */
+    text-decoration-style: solid; /* Ensures a solid line */
+    transition:
+      text-decoration-color 0.3s,
+      text-decoration-thickness 0.3s; /* Smooth transition */
+  }

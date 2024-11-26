@@ -27,8 +27,8 @@ export default class UtilHelper {
       'height',
       // 'boxShadow',
       // 'resize',
-      // 'overflow',
-      // 'whiteSpace',
+      'overflow',
+      'whiteSpace',
     ];
 
     // Apply each property to the target element
@@ -36,7 +36,15 @@ export default class UtilHelper {
       (target.style as any)[property] =
         computedStyle.getPropertyValue(property);
     });
+    // Clone scroll position
+    target.scrollTop = source.scrollTop;
+    target.scrollLeft = source.scrollLeft;
+    // target.scrollTo = source.scrollTo;
+
+    // Clone dimensions
+    target.style.width = `${source.offsetWidth}px`;
+    target.style.height = `${source.offsetHeight}px`;
+
     return target;
   }
-  
 }

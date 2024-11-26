@@ -72,9 +72,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
        }
      ```
 
-## Enahncement To Do
-- custom webpack build on watch to serve
-- text-checker:
-  . sync the scroll of textarea to text-checker
-  . click to the propose (suggestion) visiable the cursor
-
+## Enhancement To Do
+- [ ] custom webpack build on watch to serve
+- [ ] text-checker:
+  - [ ] sync the scroll of textarea to text-checker
+  - [ ] click to the propose (suggestion) visible the cursor

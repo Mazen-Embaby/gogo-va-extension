@@ -1,38 +1,75 @@
-import { NgClass } from '@angular/common';
-import { Component, HostListener, Input } from '@angular/core';
-
+import { NgClass, NgIf } from '@angular/common';
+import {
+  Component,
+  HostListener,
+  Input,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
+import { SuggestionCardComponent } from '../suggestion-card/suggestion-card.component';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { TextCheckerService } from '../text-checker.service';
+import SuggestionData from '../type/suggestion-data.interface';
 @Component({
   selector: 'app-suggestion-highlight',
   standalone: true,
-  imports: [NgClass],
+  imports: [
+    NgClass,
+    NgIf,
+    SuggestionCardComponent,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './suggestion-highlight.component.html',
   styleUrl: './suggestion-highlight.component.scss',
 })
 export class SuggestionHighlightComponent {
-  @Input() inner :string= '' ;
-  @Input() type!: 'none' | 'suggestion';
+  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 
-  @HostListener('mouseenter') onMouseEnter() {
-    console.log('mouseenter..');
-  }
+  @Input() inner: string = '';
+  @Input() type!: 'none' | 'suggestion';
+  @Input() infor!: SuggestionData | null;
+
+  constructor(
+    private viewContainer: ViewContainerRef,
+    private writeService: TextCheckerService,
+  ) {}
+
+  // @HostListener('mouseenter') onMouseEnter() {
+  //   console.log('mouseenter..');
+  //   this.trigger.toggleMenu();
+
+  // }
 
   @HostListener('mouseleave') onMouseLeave() {
     console.log('mouseleave..');
-
+    // this.trigger.closeMenu();
   }
 
-  @HostListener('click') onMC() {
-    console.log('click..');
+  // @HostListener('click') onMC() {
+  //   console.log('click..');
+  //   this.viewContainer.createComponent(SuggestionCardComponent);
+  // }
 
+  @HostListener('blur') onMC() {
+    console.log('blur..');
+    // this.viewContainer.createComponent(SuggestionCardComponent);
   }
 
-  mouseClick(){
-    console.log('mouseClick..');
+  mouseLeave() {
+    console.log('mouseLeave..');
   }
 
-  mouseOver(){
-    console.log('mouseOver..');
-
+  mouseOver() {
+    if (this.infor) {
+      console.debug(
+        `mouseOver\nmessage:${this.infor.message}\noffset:${this.infor.offset}\nlength:${this.infor.length}\nreplacement:${this.infor.replacements}`,
+      );
+      this.writeService.selectedSuggestion$.next(this.infor);
+      this.trigger.openMenu();
+    }
   }
-
 }

@@ -8,7 +8,7 @@ import 'zone.js'; // Make sure Zone.js is imported here
 import { SimpleComponent } from './app/components/simple/simple.component';
 import { createCustomElement } from '@angular/elements';
 import { FabComponent } from './app/components/fab/fab.component';
-import { WriteAssistanceComponent } from './app/components/write-assistance/write-assistance.component';
+import { WriteAssistanceComponent } from './app/components/text-checker/write-assistance/write-assistance.component';
 import { TextCheckerComponent } from './app/components/text-checker/text-checker.component';
 
 createApplication()

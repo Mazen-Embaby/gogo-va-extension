@@ -14,3 +14,35 @@
 .highligh-color:hover {
   background-color: #ff00004d;
 }
+
+
+.mat-menu-panel {
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+
+}
+
+.mat-menu-content {
+  padding: 0 !important;
+}
+
+
+::ng-deep .mat-menu-panel {
+  padding: 0 !important; /* Remove all padding around the menu */
+}
+
+::ng-deep .mat-menu-content {
+  padding: 0 !important; /* Remove padding inside the menu content */
+}
+
+
+.mat-mdc-menu-content {
+  padding: 0;
+}
+
+
+.custom-select.mat-mdc-select-panel {
+  padding:0;
+}

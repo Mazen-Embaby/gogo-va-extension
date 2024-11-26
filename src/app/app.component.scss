@@ -1,0 +1,15 @@
+::ng-deep .mat-menu-panel {
+    padding: 0 !important; /* Remove all padding around the menu */
+  }
+  
+  ::ng-deep .mat-menu-content {
+    padding: 0 !important; /* Remove padding inside the menu content */
+  }
+
+  .mat-menu-content{
+    padding: 0;
+  }
+
+  .mat-mdc-menu-content {
+    padding: 0;
+  }
