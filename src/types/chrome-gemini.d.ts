@@ -1,4 +1,3 @@
-export {};
 import type { ReadableStream } from 'node:stream/web';
 
 declare global {
@@ -11,7 +10,6 @@ declare global {
 
   interface Session {
     prompt: (string, signal?: {}) => any; // possibly string
-    // promptStreaming: (string, signal?: {}) => AsyncIterableIterator<string>;
     promptStreaming: (string, signal?: {}) => ReadableStream<any>; // object
 
     clone: (signal?: any) => Promise<any>;

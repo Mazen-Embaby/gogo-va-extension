@@ -15,10 +15,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { ChatMessage } from '../../types/message.interface';
-import { DeepChat } from 'deep-chat';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../../components/dialog/confirmation-dialog/confirmation-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatRipple } from '@angular/material/core';
 
 // import type { ReadableStream } from 'node:stream/web';
 
@@ -27,6 +27,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   standalone: true,
   imports: [
     MatIconModule,
+    MatRipple,
     NgClass,
     ReactiveFormsModule,
     NgFor,
@@ -105,6 +106,11 @@ export class ChatComponent {
         // Handle cancellation
       }
     });
+  }
+
+  sendChat(text: string) {
+    this.form.get('userInput')!.setValue(text);
+    this.sendMessage();
   }
 
   async sendMessage() {
