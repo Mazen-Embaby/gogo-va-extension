@@ -10,7 +10,7 @@ interface MenuItem {
   link?: string;
   icon: string;
   isOpen?: boolean;
-  children: Array<MenuItem>;
+  children: MenuItem[];
 }
 
 @Component({

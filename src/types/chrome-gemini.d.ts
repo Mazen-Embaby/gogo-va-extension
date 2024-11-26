@@ -6,7 +6,7 @@ declare global {
     systemPrompt?: string;
     temperature?: number;
     topK?: number;
-    initialPrompts?: Array<{ role: string; content: string }>;
+    initialPrompts?: { role: string; content: string }[];
   }
 
   interface Session {

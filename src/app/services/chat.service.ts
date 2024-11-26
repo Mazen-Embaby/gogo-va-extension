@@ -13,7 +13,7 @@ export class ChatService {
 
   constructor() {}
 
-  async createSesssion(messages?: Array<Message>) {
+  async createSesssion(messages?: Message[]) {
     if (messages) {
       this.session = await window.ai.languageModel.create({
         initialPrompts: messages,

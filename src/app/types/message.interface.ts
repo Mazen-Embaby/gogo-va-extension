@@ -5,8 +5,8 @@
 
 import { Message } from 'ai';
 
-export type ChatMessage = {
+export interface ChatMessage {
   content: string;
   role: 'system' | 'user' | 'assistant' | 'function' | 'data' | 'tool';
   avatar? :string;
-};
+}

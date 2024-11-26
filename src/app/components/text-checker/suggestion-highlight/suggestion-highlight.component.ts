@@ -29,7 +29,7 @@ import SuggestionData from '../type/suggestion-data.interface';
 export class SuggestionHighlightComponent {
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 
-  @Input() inner: string = '';
+  @Input() inner = '';
   @Input() type!: 'none' | 'suggestion';
   @Input() infor!: SuggestionData | null;
 

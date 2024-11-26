@@ -8,7 +8,7 @@ import {
   Input,
   Renderer2,
   ViewChild,
-  ViewContainerRef,
+  ViewContainerRef, OnInit,
 } from '@angular/core';
 import { HighlightDirective } from '../../directives/highlight.directive';
 import { TextCheckerService } from './text-checker.service';
@@ -25,7 +25,7 @@ import SuggestionData from './type/suggestion-data.interface';
   templateUrl: './text-checker.component.html',
   styleUrl: './text-checker.component.scss',
 })
-export class TextCheckerComponent implements AfterViewInit {
+export class TextCheckerComponent implements AfterViewInit, OnInit {
   @ViewChild('divRef') private divRef!: ElementRef;
   @ContentChild('textAreaRef', { static: true }) textAreaRef!: ElementRef;
 
@@ -123,12 +123,12 @@ export class TextCheckerComponent implements AfterViewInit {
     // Remove all suggestion | text
     (this.textChecker.element.nativeElement as HTMLDivElement).innerHTML = '';
 
-    let itemIdx = 0;
+    const itemIdx = 0;
     this.counterComponents = 0;
     if (!issues || issues.length === 0)
       return this.textCheckerService.escapeHtml(fullText);
 
-    let resultText = '';
+    const resultText = '';
     let lastIndex = 0;
 
     issues.forEach((issue) => {
