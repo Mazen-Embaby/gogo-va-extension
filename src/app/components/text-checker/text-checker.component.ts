@@ -8,14 +8,15 @@ import {
   Input,
   Renderer2,
   ViewChild,
-  ViewContainerRef, OnInit,
+  ViewContainerRef,
+  OnInit,
+  OnDestroy,
 } from '@angular/core';
-import { HighlightDirective } from '../../directives/highlight.directive';
 import { TextCheckerService } from './text-checker.service';
 import { GrammarMockService } from './text-checker.mock.service';
 import UtilHelper from '../../utils/util-helper';
 import { SuggestionHighlightComponent } from './suggestion-highlight/suggestion-highlight.component';
-import { distinctUntilChanged, map } from 'rxjs';
+import { distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import SuggestionData from './type/suggestion-data.interface';
 
 @Component({
@@ -25,7 +26,7 @@ import SuggestionData from './type/suggestion-data.interface';
   templateUrl: './text-checker.component.html',
   styleUrl: './text-checker.component.scss',
 })
-export class TextCheckerComponent implements AfterViewInit, OnInit {
+export class TextCheckerComponent implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild('divRef') private divRef!: ElementRef;
   @ContentChild('textAreaRef', { static: true }) textAreaRef!: ElementRef;
 
@@ -42,6 +43,7 @@ export class TextCheckerComponent implements AfterViewInit, OnInit {
   // @ContentChildren('textAreaRef', { descendants: true }) textAreaRef!: QueryList<any>;
 
   @Input() color = 'yellow';
+  private _unsubscribeAll: Subject<unknown> = new Subject<unknown>();
 
   constructor(
     private el: ElementRef,
@@ -58,6 +60,12 @@ export class TextCheckerComponent implements AfterViewInit, OnInit {
 
     this.textCheckerService.setSelectedTextChecker(this.textChecker);
   }
+
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
+  }
   write() {
     this.textElement.value = 'text changed';
   }
@@ -65,13 +73,14 @@ export class TextCheckerComponent implements AfterViewInit, OnInit {
   ngAfterViewInit(): void {
     this.textCheckerService.textareaValue$
       .pipe(
+        takeUntil(this._unsubscribeAll),
         distinctUntilChanged((prev, curr) => {
           return prev == curr;
         }),
       )
       .subscribe((v) => {
         if (this.textElement.value != v) {
-          console.log('CHANGETEXT FUNC,,,');
+          console.debug('CHANGE TEXTAREA');
           this.textElement.value = v;
         }
         this.checkText();

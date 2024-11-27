@@ -10,18 +10,18 @@ import SuggestionData from './type/suggestion-data.interface';
 export class TextCheckerService {
   constructor(private chatService: ChatService) {}
 
-  textareaValue$: ReplaySubject<string> = new ReplaySubject(1);
-  selectedSuggestion$: ReplaySubject<SuggestionData> = new ReplaySubject(1);
+  textareaValue$ = new ReplaySubject<string>(1);
+  selectedSuggestion$ = new ReplaySubject<SuggestionData>(1);
 
-  suggestionHighlightComponents$: ReplaySubject<
+  suggestionHighlightComponents$ = new ReplaySubject<
     ComponentRef<SuggestionHighlightComponent>[]
-  > = new ReplaySubject(1);
+  >(1);
 
-  selectedTextChecker$: ReplaySubject<ViewContainerRef> = new ReplaySubject(1);
+  selectedTextChecker$ = new ReplaySubject<ViewContainerRef>(1);
 
-  selectedSuggestionHighlightComponents$: ReplaySubject<
+  selectedSuggestionHighlightComponents$ = new ReplaySubject<
     ComponentRef<SuggestionHighlightComponent>
-  > = new ReplaySubject(1);
+  >(1);
 
   setSuggestionHighlightComponents(
     x: ComponentRef<SuggestionHighlightComponent>[],

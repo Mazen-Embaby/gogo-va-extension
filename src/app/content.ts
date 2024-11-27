@@ -43,7 +43,7 @@ async function checkGrammar(inputElement: HTMLTextAreaElement): Promise<void> {
 // Show suggestions in a popup near the text field
 function showSuggestions(
   inputElement: HTMLTextAreaElement,
-  matches: Array<{ message: string; replacements: { value: string }[] }>,
+  matches: { message: string; replacements: { value: string }[] }[],
 ): void {
   const popup = document.createElement('div');
   popup.className = 'suggestions-popup';

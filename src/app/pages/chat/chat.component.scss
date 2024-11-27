@@ -18,3 +18,9 @@
   .scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
     border-radius: 0.25rem;
   }
+
+  @media (max-width: 400px) {
+    .hidden-on-small {
+      display: none;
+    }
+  }

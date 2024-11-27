@@ -14,7 +14,11 @@
     "watch:extension": "ng build --watch --output-hashing=none && tsc src/app/content.ts src/app/background.ts --outDir dist/chrome-extension/browser/app --watch",
     "build:extension": "ng build --output-hashing=none && tsc src/app/content.ts src/app/background.ts --outDir dist/chrome-extension/browser/app",
     "copy-assets": "rsync -av --exclude 'tsconfig.json' --exclude 'src' --exclude 'dist' ./dist/",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "prepare": "husky install"
+  },
+  "scarfSettings": {
+    "enabled": false
   },
   "private": true,
   "dependencies": {
@@ -32,6 +36,8 @@
     "@webcomponents/custom-elements": "^1.6.0",
     "ai": "^3.4.33",
     "deep-chat": "^2.0.1",
+    "lottie-web": "^5.12.2",
+    "ngx-lottie": "^12.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "ulidx": "^2.4.1",
@@ -48,9 +54,11 @@
     "@types/chrome": "^0.0.283",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^22.9.1",
+    "@types/webextension-polyfill": "^0.12.1",
     "@types/webpack": "^5.28.5",
     "angular-eslint": "18.4.2",
     "eslint": "^9.15.0",
+    "husky": "^9.1.7",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -63,6 +71,7 @@
     "ts-node": "^10.9.2",
     "typescript": "~5.5.2",
     "typescript-eslint": "8.15.0",
+    "webextension-polyfill": "^0.12.0",
     "webpack-cli": "^5.1.4",
     "webpack-ext-reloader": "^1.1.13"
   }

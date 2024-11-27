@@ -1,10 +1,5 @@
-import {
-  Component,
-  ElementRef,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-
 import { ChatService } from '../../services/chat.service';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import {
@@ -20,7 +15,6 @@ import { ConfirmationDialogComponent } from '../../components/dialog/confirmatio
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatRipple } from '@angular/material/core';
 
-// import type { ReadableStream } from 'node:stream/web';
 
 @Component({
   selector: 'app-chat',
@@ -42,8 +36,6 @@ export class ChatComponent {
 
   form: FormGroup;
 
-  // userInput: string = '';
-  // currentStreamMessage = new ReplaySubject<String>(1); // Buffer of 1 for real-time updates
   currentStreamMessage?: ChatMessage = undefined;
 
   messages: ChatMessage[] = [
@@ -119,7 +111,7 @@ export class ChatComponent {
     }
     this.form.disable();
     let isMessagePushed = false;
-    const userInput: string = this.form.get('userInput')?.value.trim();
+    const userInput: string = this.form.get('userInput')?.value?.trim();
 
     const sentMessage: ChatMessage = {
       content: userInput,
@@ -130,8 +122,6 @@ export class ChatComponent {
 
     try {
       const streamText = await this.chatService.streamText(userInput);
-      // const streamText = this.chatMockService.mockAIResponse(this.userInput); // test purpose
-      // const aiResponse$ = from(streamText);
       this.messages.push(sentMessage);
       this.messages.push({
         content: '',
@@ -169,67 +159,5 @@ export class ChatComponent {
     }
 
     this.form.enable();
-
-    // this.messages.push(sentMessage);
-
-    // this.userInput = '';
-
-    // this.currentStreamMessage = {
-    //   content: '',
-    //   role: 'assistant',
-    //   avatar: '',
-    // };
-    // aiResponse$
-    //   .pipe(
-    //     finalize(
-    //       () => {
-    //         console.debug('Stream Finalize complete');
-    //         this.userInput = '';
-    //         this.currentStreamMessage = undefined;
-    //       }, // Execute when the observable completes
-    //     ),
-    //   )
-    //   .subscribe({
-    //     next: async (aiText) => {
-    //         for await (const chunk of aiText) {
-    //           console.debug('Stream..');
-    //           this.currentStreamMessage!.content =
-    //           this.currentStreamMessage!.content + chunk;
-    //       }
-
-    //       console.debug('AI stream complete');
-    //       this.messages.push(this.currentStreamMessage!);
-    //       this.currentStreamMessage = undefined;
-    //     },
-    //     error: (err) => {
-    //       const lastMessage = this.messages.pop();
-    //       console.error('Error:', err);
-    //     },
-    //     complete: () => {
-
-    //     },
-    //   });
-
-    // aiResponse$.subscribe((aiText) => {
-
-    //   const receivedMessage: ChatMessage = {
-    //     content: aiText,
-    //     role: 'system',
-    //     avatar:
-    //       'https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=3&w=144&h=144',
-    //   };
-    //   this.messages.push(receivedMessage);
-    // });
-
-    // this.output = await this.chatService.promptText(userMessage.text);
-
-    // const agentMessage = {
-    //   text: this.output,
-    //   sentByUser: false,
-    //   profileImage:
-    //     'https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=3&w=144&h=144',
-    // };
-    // this.messages.push(agentMessage);
-    // this.userInput = ''; // Clear the input field
   }
 }

@@ -1,4 +1,4 @@
-<span [ngClass]="{ 'highligh-color': type == 'suggestion'}"   [matMenuTriggerFor]="menu" (mouseover)="mouseOver()" (blur)="mouseLeave()" >{{inner}}</span>
+<span [ngClass]="{ 'highligh-color': type === 'suggestion'}"   [matMenuTriggerFor]="menu" (mouseover)="mouseOver()" (blur)="mouseLeave()" >{{inner}}</span>
 
 <!-- <button style="pointer-events: auto;" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
     <mat-icon>more_vert</mat-icon>

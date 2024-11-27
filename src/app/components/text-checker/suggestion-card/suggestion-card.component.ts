@@ -28,8 +28,8 @@ export class SuggestionCardComponent implements OnInit{
   getImg(asset: string){
     // console.log(chrome.runtime);
 
-    const x = chrome.runtime.getURL(asset);
-    return x;
+    // const x = chrome.runtime.getURL(asset);
+    // return x;
   }
   getOldVal(){
     if (this.info) {
