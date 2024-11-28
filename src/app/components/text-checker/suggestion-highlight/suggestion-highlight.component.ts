@@ -11,7 +11,7 @@ import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { TextCheckerService } from '../text-checker.service';
-import SuggestionData from '../type/suggestion-data.interface';
+import SuggestionData from '../types/suggestion-data.interface';
 @Component({
   selector: 'app-suggestion-highlight',
   standalone: true,

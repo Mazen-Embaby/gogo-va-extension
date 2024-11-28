@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ChatMessage } from '../../types/message.interface';
+import { ChatMessage } from '../../types/chat-message.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../../components/dialog/confirmation-dialog/confirmation-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -107,6 +107,7 @@ export class ChatComponent {
 
   async sendMessage() {
     if (this.form.invalid) {
+      console.error('Please select the mandatory fields');
       return;
     }
     this.form.disable();

@@ -17,7 +17,7 @@ import { GrammarMockService } from './text-checker.mock.service';
 import UtilHelper from '../../utils/util-helper';
 import { SuggestionHighlightComponent } from './suggestion-highlight/suggestion-highlight.component';
 import { distinctUntilChanged, Subject, takeUntil } from 'rxjs';
-import SuggestionData from './type/suggestion-data.interface';
+import SuggestionData from './types/suggestion-data.interface';
 
 @Component({
   selector: 'app-text-checker',

@@ -7,19 +7,36 @@
     <div>
       <textarea formControlName="userInput"
         class="flex min-h-[150px]  w-full  rounded-md border border-input bg-transparent px-3 py-2 mb-5 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-        autocomplete="off" name="message" placeholder="Write the topic you need to write about ..." (keydown)="onKeydown($event)">
+        autocomplete="off" name="message" placeholder="Write the topic you need to write about ..."
+        (keydown)="onKeydown($event)">
 
       </textarea>
 
-      <p class="text-sm">🕮 Format: </p>
+      <p class="text-sm ">🕮 Format: </p>
+      <mat-chip-listbox  #formatList aria-label="Single selection chip list" [multiple]="false" [selectable]="false">
+        <mat-chip-option *ngFor="let chip of formatChips" [selected]="chip === selectedFormatChip" (click)="selectFormatChip(chip)">
+          {{ chip }}
+        </mat-chip-option>
+      </mat-chip-listbox>
 
-      <p class="text-sm">🤔 Tone: </p>
 
-      <p class="text-sm">📝 Length: </p>
+      <p class="text-sm pt-5 -pb-5 -mb-2">🤔 Tone: </p>
+      <mat-chip-listbox #toneList aria-label="Single selection chip list" [multiple]="false" [selectable]="false">
+        <mat-chip-option *ngFor="let chip of toneChips" [selected]="chip===selectedToneChip" (click)="selectToneChip(chip)">
+          {{ chip }}
+        </mat-chip-option>
+      </mat-chip-listbox>
+
+      <p class="text-sm pt-5">📝 Length: </p>
+      <mat-chip-listbox #lengthList aria-label="Single selection chip list" [multiple]="false" [selectable]="false" >
+        <mat-chip-option *ngFor="let chip of lengthChips" [selected]="chip === selectedLengthChip" (click)="selectLengthChip(chip)">
+          {{ chip }}
+        </mat-chip-option>
+      </mat-chip-listbox>
 
     </div>
 
-    <button class=" w-full " mat-button>Send</button>
+    <button [disabled]="form.invalid || form.disabled || !selectedFormatChip || !selectedLengthChip || !selectedToneChip" class=" custom-send-button" [color]="'#00ffff'"  mat-stroked-button>Send</button>
 
   </form>
 

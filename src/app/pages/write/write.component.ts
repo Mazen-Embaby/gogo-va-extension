@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import {
   FormBuilder,
@@ -11,15 +11,23 @@ import { ChatService } from '../../services/chat.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmationDialogComponent } from '../../components/dialog/confirmation-dialog/confirmation-dialog.component';
-import { ChatMessage } from '../../types/message.interface';
+import { ChatMessage } from '../../types/chat-message.interface';
 import { MatButton } from '@angular/material/button';
 import { MatRipple } from '@angular/material/core';
-
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'app-write',
   standalone: true,
-  imports: [NgFor, FormsModule, ReactiveFormsModule, MatButton, MatRipple],
+  imports: [
+    NgFor,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButton,
+    MatRipple,
+    MatChipsModule,
+    NgIf,
+  ],
   templateUrl: './write.component.html',
   styleUrl: './write.component.scss',
 })
@@ -27,9 +35,27 @@ export class WriteComponent {
   @ViewChild('writeWindow') private writeWindow!: ElementRef;
   form: FormGroup;
 
+  formatChips: string[] = ['Paragraph', 'Email', 'Comment', 'Message'];
+  selectedFormatChip: string = this.formatChips[0];
+
+  toneChips: string[] = ['Formal', 'Funny', 'Professional'];
+  selectedToneChip: string = this.toneChips[0];
+
+  lengthChips: string[] = ['Short', 'Medium', 'Long'];
+  selectedLengthChip: string = this.lengthChips[0];
+
   messages: ChatMessage[] = [];
   userInput = '';
 
+  selectFormatChip(chip: string): void {
+    this.selectedFormatChip = chip;
+  }
+  selectToneChip(chip: string): void {
+    this.selectedToneChip = chip;
+  }
+  selectLengthChip(chip: string): void {
+    this.selectedLengthChip = chip;
+  }
   constructor(
     private fb: FormBuilder,
     private chatService: ChatService,
@@ -37,7 +63,7 @@ export class WriteComponent {
     private snackBar: MatSnackBar,
   ) {
     this.form = this.fb.group({
-      userInput: ['', Validators.required],
+      userInput: [null, Validators.required],
     });
   }
 
@@ -81,28 +107,32 @@ export class WriteComponent {
     });
   }
 
-  sendChat(text: string) {
-    this.form.get('userInput')!.setValue(text);
-    this.sendMessage();
-  }
-
   async sendMessage() {
-    if (this.form.invalid) {
+    if (this.form.invalid)
+     {
+      console.error('Please select the mandatory fields');
       return;
     }
+
     this.form.disable();
+
     let isMessagePushed = false;
-    const userInput: string = this.form.get('userInput')?.value?.trim();
+
+    const topic = this.form.get('userInput')?.value?.trim();
+    const format = this.selectedFormatChip;
+    const tone = this.selectedToneChip;
+    const length = this.selectedLengthChip;
+    const text = this.writeTemplate(topic, format!, tone!, length!);
 
     const sentMessage: ChatMessage = {
-      content: userInput,
+      content: text,
       role: 'user',
     };
 
     this.form.reset();
 
     try {
-      const streamText = await this.chatService.streamText(userInput);
+      const streamText = await this.chatService.streamText(text);
       this.messages.push(sentMessage);
       this.messages.push({
         content: '',
@@ -140,5 +170,14 @@ export class WriteComponent {
     }
 
     this.form.enable();
+  }
+
+  writeTemplate(
+    topic: string,
+    format: string,
+    tone: string,
+    length: string,
+  ): string {
+    return `Write a topic about '${topic}' formated as '${format}' with tone '${tone}' and it length '${length}'`;
   }
 }

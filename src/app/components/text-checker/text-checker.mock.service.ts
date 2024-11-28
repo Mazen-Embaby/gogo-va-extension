@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import SuggestionData from './type/suggestion-data.interface';
+import SuggestionData from './types/suggestion-data.interface';
 
 interface xx{
   matches: SuggestionData[]
