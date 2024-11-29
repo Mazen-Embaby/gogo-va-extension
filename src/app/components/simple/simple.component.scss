@@ -1,3 +1,29 @@
 .custom{
     background-color: aqua;
 }
+
+#highlighter {
+    align-items: center;
+    background-color: black;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    justify-content: center;
+    padding: 5px 10px;
+    position: fixed;
+    width: 40px;
+    z-index: 9999;
+  }
+
+  .text-marker {
+    fill: white;
+  }
+
+  .text-marker:hover {
+    fill: rgb(213, 234, 255);
+  }
+
+  .highlight {
+    background-color: rgb(213, 234, 255);
+    display: inline;
+  }
