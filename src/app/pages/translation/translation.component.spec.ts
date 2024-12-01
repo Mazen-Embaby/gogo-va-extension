@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WriteComponent } from './write.component';
+import { TranslationComponent } from './translation.component';
 
-describe('WriteComponent', () => {
-  let component: WriteComponent;
-  let fixture: ComponentFixture<WriteComponent>;
+describe('TranslationComponent', () => {
+  let component: TranslationComponent;
+  let fixture: ComponentFixture<TranslationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WriteComponent]
+      imports: [TranslationComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(WriteComponent);
+    fixture = TestBed.createComponent(TranslationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

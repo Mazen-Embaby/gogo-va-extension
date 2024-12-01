@@ -1,0 +1,23 @@
+<div class="deepchat-config">
+    <h2>DeepChat Configuration</h2>
+    <div>
+      <p>Configure your chat settings:</p>
+      <label for="appKey">App Key:</label>
+      <input [(ngModel)]="chatConfig.appKey" type="text" id="appKey" />
+  
+      <label for="userName">User Name:</label>
+      <input [(ngModel)]="chatConfig.user.name" type="text" id="userName" />
+  
+      <label for="userEmail">User Email:</label>
+      <input [(ngModel)]="chatConfig.user.email" type="email" id="userEmail" />
+  
+      <label for="themeColor">Chat Theme Color:</label>
+      <input [(ngModel)]="chatConfig.theme.color" type="color" id="themeColor" />
+  
+      <label for="customMessage">Custom Welcome Message:</label>
+      <textarea [(ngModel)]="chatConfig.customMessage" id="customMessage"></textarea>
+  
+      <button (click)="loadDeepChat()">Initialize Chat</button>
+    </div>
+  </div>
+  

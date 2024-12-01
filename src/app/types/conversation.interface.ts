@@ -1,6 +1,9 @@
-import { ChatMessage } from "./chat-message.interface";
+import { ChatMessage } from './chat-message.interface';
 
 export interface Conversation {
-    id: string; // ULID
-    messages: ChatMessage[];
+  id: string; // ULID
+  name: string;
+  date: number;
+  messages: ChatMessage[];
+  isFav: boolean;
 }

@@ -10,6 +10,8 @@ import {
   throwError,
 } from 'rxjs';
 import { Conversation } from '../types/conversation.interface';
+import { ChatMessage } from '../types/chat-message.interface';
+import { GeminiService } from './gemini.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +22,8 @@ export class ChatService {
   private _conversation = new ReplaySubject<Conversation>(1);
   private _conversations = new ReplaySubject<Map<string, Conversation>>(1);
 
+  constructor(private geminiService: GeminiService){
+  }
   /**
    * Constructor
    */
@@ -58,7 +62,7 @@ export class ChatService {
     sort = 'id',
     order: 'asc' | 'desc' | '' = 'asc',
     search = '',
-  ) {
+  )  :Promise<Map<string, Conversation>> {
     let restoredMap = new Map<string, Conversation>();
     chrome.storage.local.get(this._conversationKey, (result) => {
       if (result[this._conversationKey]) {
@@ -73,12 +77,14 @@ export class ChatService {
       this._conversations.next(restoredMap);
       return map;
     });
+    return restoredMap;
   }
 
-  /**
+
+   /**
    * Get conversation by id
    */
-  getConversationById(id: string): Observable<Conversation> {
+   getConversationById(id: string): Observable<Conversation | null> {
     return this._conversations.pipe(
       take(1),
       map((conversations) => {
@@ -88,6 +94,7 @@ export class ChatService {
         // Update the conversation
         if (conversation) {
           this._conversation.next(conversation);
+          this.createSesssion(conversation.messages);
         }
 
         // Return the conversation
@@ -95,9 +102,7 @@ export class ChatService {
       }),
       switchMap((conversation) => {
         if (!conversation) {
-          return throwError(
-            'Could not found conversation with id of ' + id + '!',
-          );
+          throwError(() => new Error('Could not found conversation with id of ' + id + '!'))
         }
 
         return of(conversation);
@@ -112,11 +117,10 @@ export class ChatService {
     return this.conversations$.pipe(
       take(1),
       map((conversations) => {
+        console.log('createConversation!');
         conversations.set(conversation.id, conversation);
         // Convert Map to an array and store it
-        chrome.storage.local.set(
-          { conversation: Array.from(conversations) },
-          () => {
+        chrome.storage.local.set( { [this._conversationKey]: Array.from(conversations) }, () => {
             console.log('Map stored successfully!');
             // Update the conversations with the new conversation
             this._conversations.next(conversations);
@@ -134,9 +138,7 @@ export class ChatService {
       map((conversations) => {
         conversations.set(conversation.id, conversation);
         // Convert Map to an array and store it
-        chrome.storage.local.set(
-          { conversation: Array.from(conversations) },
-          () => {
+        chrome.storage.local.set( { [this._conversationKey]: Array.from(conversations) }, () => {
             console.log('Map stored successfully!');
             // Update the conversations with the new conversation
             this._conversations.next(conversations);
@@ -154,9 +156,7 @@ export class ChatService {
       map((conversations) => {
         const isDeleted = conversations.delete(id);
         if (isDeleted) {
-          chrome.storage.local.set(
-            { conversation: Array.from(conversations) },
-            () => {
+          chrome.storage.local.set( { [this._conversationKey]: Array.from(conversations) }, () => {
               console.debug('Map deleted successfully!');
               // Update the conversations with the new conversation
               this._conversations.next(conversations);
@@ -169,7 +169,7 @@ export class ChatService {
     );
   }
 
-  async createSesssion(messages?: Message[]) {
+  async createSesssion(messages?: ChatMessage[]) {
     if (messages) {
       this.session = await window.ai.languageModel.create({
         initialPrompts: messages,
@@ -194,4 +194,5 @@ export class ChatService {
     const res = this.session!.promptStreaming(text);
     return res;
   }
+ 
 }

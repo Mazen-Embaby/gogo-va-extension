@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Translation App</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
+    <h1 class="text-2xl font-bold text-center text-blue-600 mb-6">Translation App</h1>
+
+    <!-- Language Selection -->
+    <div class="space-y-6">
+      <!-- Source and Target Language Selection -->
+      <div class="flex justify-between items-center">
+        <div class="flex flex-col items-center">
+          <label for="sourceLanguage" class="font-medium text-gray-700 mb-2">Source Language</label>
+          <div id="sourceLanguage" class="grid grid-cols-3 gap-4">
+            <button class="lang-button" data-lang="en">English</button>
+            <button class="lang-button" data-lang="es">Spanish</button>
+            <button class="lang-button" data-lang="fr">French</button>
+            <button class="lang-button" data-lang="de">German</button>
+            <button class="lang-button" data-lang="it">Italian</button>
+            <button class="lang-button" data-lang="pt">Portuguese</button>
+          </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+          <label for="targetLanguage" class="font-medium text-gray-700 mb-2">Target Language</label>
+          <div id="targetLanguage" class="grid grid-cols-3 gap-4">
+            <button class="lang-button" data-lang="es">Spanish</button>
+            <button class="lang-button" data-lang="fr">French</button>
+            <button class="lang-button" data-lang="de">German</button>
+            <button class="lang-button" data-lang="it">Italian</button>
+            <button class="lang-button" data-lang="pt">Portuguese</button>
+            <button class="lang-button" data-lang="en">English</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input Text -->
+      <div class="flex flex-col">
+        <label for="textInput" class="font-medium text-gray-700 mb-2">Enter Text to Translate</label>
+        <textarea id="textInput" class="p-4 border border-gray-300 rounded-md h-32 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your text here..."></textarea>
+      </div>
+
+      <!-- Translate Button -->
+      <div class="flex justify-center">
+        <button id="translateButton" class="bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          Translate
+        </button>
+      </div>
+
+      <!-- Translated Text Output -->
+      <div class="flex flex-col mt-6">
+        <label for="translatedText" class="font-medium text-gray-700 mb-2">Translated Text</label>
+        <textarea id="translatedText" class="p-4 border border-gray-300 rounded-md h-32 focus:outline-none focus:ring-2 focus:ring-blue-500" readonly placeholder="Translation will appear here..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Track selected languages
+    let sourceLang = 'en';
+    let targetLang = 'es';
+
+    // Set event listeners for language selection buttons
+    document.querySelectorAll('.lang-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const lang = button.getAttribute('data-lang');
+
+        // Check if it's for the source or target language
+        if (button.closest('#sourceLanguage')) {
+          sourceLang = lang;
+          document.getElementById('sourceLanguage').querySelectorAll('.lang-button').forEach(btn => btn.classList.remove('bg-blue-100', 'border-blue-500'));
+          button.classList.add('bg-blue-100', 'border-blue-500');
+        } else {
+          targetLang = lang;
+          document.getElementById('targetLanguage').querySelectorAll('.lang-button').forEach(btn => btn.classList.remove('bg-blue-100', 'border-blue-500'));
+          button.classList.add('bg-blue-100', 'border-blue-500');
+        }
+      });
+    });
+
+    // Placeholder for translation functionality (can be replaced with actual translation API)
+    document.getElementById("translateButton").addEventListener("click", function () {
+      const inputText = document.getElementById("textInput").value;
+
+      if (!inputText.trim()) {
+        alert("Please enter some text to translate.");
+        return;
+      }
+
+      // Simulate translation by appending "-translated" (Replace with actual API call)
+      const translatedText = inputText + " (translated from " + sourceLang + " to " + targetLang + ")";
+
+      // Display the translated text
+      document.getElementById("translatedText").value = translatedText;
+    });
+  </script>
+</body>
+
+</html>

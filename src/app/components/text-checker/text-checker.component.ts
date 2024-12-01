@@ -18,11 +18,12 @@ import UtilHelper from '../../utils/util-helper';
 import { SuggestionHighlightComponent } from './suggestion-highlight/suggestion-highlight.component';
 import { distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import SuggestionData from './types/suggestion-data.interface';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-text-checker',
   standalone: true,
-  imports: [SuggestionHighlightComponent],
+  imports: [SuggestionHighlightComponent, NgStyle],
   templateUrl: './text-checker.component.html',
   styleUrl: './text-checker.component.scss',
 })
@@ -43,6 +44,11 @@ export class TextCheckerComponent implements AfterViewInit, OnInit, OnDestroy {
   // @ContentChildren('textAreaRef', { descendants: true }) textAreaRef!: QueryList<any>;
 
   @Input() color = 'yellow';
+  @Input() prop = '';
+
+  clonedStyle = new Map<string, string>();
+  shadowClone = {};
+  text = '';
   private _unsubscribeAll: Subject<unknown> = new Subject<unknown>();
 
   constructor(
@@ -51,7 +57,28 @@ export class TextCheckerComponent implements AfterViewInit, OnInit, OnDestroy {
     private textCheckerService: TextCheckerService,
     private grammarMockService: GrammarMockService,
     private viewContainer: ViewContainerRef,
-  ) {}
+  ) {
+    this.listenForStyles();
+  }
+
+  listenForStyles() {
+    // Check if the Chrome runtime API is available
+    if (window.chrome && chrome.runtime && chrome.runtime.onMessage) {
+      chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+        if (message.action === 'relayStyles') {
+          const data = JSON.parse(message.data);
+          const styleMap = new Map<string, string>(Object.entries(data));
+          console.log('data!', data);
+          console.log('styleMap', styleMap);
+          
+          // this.clonedStyles = message.data; // Apply the styles to the Angular component
+          // console.log('Received styles:', this.clonedStyles);
+        }
+      });
+    } else {
+      console.error('Chrome runtime API is not available.');
+    }
+  }
 
   ngOnInit(): void {
     this.textElement = (
@@ -59,6 +86,56 @@ export class TextCheckerComponent implements AfterViewInit, OnInit, OnDestroy {
     ).querySelector('textarea')!;
 
     this.textCheckerService.setSelectedTextChecker(this.textChecker);
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        console.debug('mutation:', mutation);
+
+        if (mutation.attributeName === 'props') {
+          const props = JSON.parse(this.el.nativeElement.getAttribute('props'));
+
+          this.clonedStyle = new Map<string, string>(
+            Object.entries(JSON.parse(props.clonedStyle)),
+          );
+          this.text = props.text;
+
+          // this.shadowClone = props.clonedStyle;
+          // console.debug('this.shadowClone:', this.shadowClone);
+          console.debug('this.clonedStyle:', this.clonedStyle);
+          console.debug('this.text:', this.text);
+
+          // (this.textChecker.element.nativeElement as HTMLDivElement).style = UtilHelper.mapStyleToString(this.clonedStyle);
+
+          this.clonedStyle.forEach((value, key) => {
+            // (targetElement.style as any)[key] = value;
+            console.log(`key::${key}, value::${value}`);
+            this.textChecker.element.nativeElement.style.setProperty(
+              key,
+              value,
+            );
+
+            // targetElement.style.setProperty(key, value);
+            // targetElement.style['s'] = value;
+          });
+
+          this.textCheckerService.textareaValue$.next(this.text);
+
+          // const inputValue = this.textElement.value;
+          // console.debug('this.markerPosition:', this.markerPosition );
+          // console.debug('XX', xx );
+          // this.markerStyle = {
+          //   ...xx,
+          //   // display: `${xx['display']}`,
+          //   // left: `${xx['left']}px`,
+          //   // top: `${xx['top']}px`,
+          // };
+        }
+      });
+    });
+
+    //  observer.observe(this.el.nativeElement, { attributes: true, attributeFilter: ['style'] });
+
+    observer.observe(this.el.nativeElement, { attributes: true });
   }
 
   ngOnDestroy(): void {
@@ -83,8 +160,20 @@ export class TextCheckerComponent implements AfterViewInit, OnInit, OnDestroy {
           console.debug('CHANGE TEXTAREA');
           this.textElement.value = v;
         }
-        this.checkText();
+        this.checkText(v);
       });
+
+    (this.textChecker.element.nativeElement as HTMLDivElement).addEventListener(
+      'input',
+      () => {
+        const input = (this.textChecker.element.nativeElement as HTMLDivElement)
+          .innerText;
+        console.debug('chnage text0checker div ', input);
+        this.textCheckerService.textareaValue$.next(input);
+      },
+    );
+    // const x = (this.divRef.nativeElement as HTMLDivElement).previousSibling;
+    // console.log('ana next sibling', x);
     // console.log('divRef', this.divRef);
     // console.log('textRef', this.textAreaRef.nativeElement);
     // this.textAreaRef.nativeElement.setAttribute('appHighlight', 'red');
@@ -119,13 +208,21 @@ export class TextCheckerComponent implements AfterViewInit, OnInit, OnDestroy {
     // this.injectButtonService.injectButton(this.el.nativeElement);
   }
 
-  async checkText() {
-    const text = this.textElement.value;
-    // Simulate grammar analysis with mock data
-    const issues = await this.grammarMockService.mockGrammarResponse(text);
-    // const issues = await this.textCheckerService.checkMistakes(text);
-    console.debug('Issues Error(Improve):', issues);
-    await this.updateUI(text, issues);
+  async checkText(text: string) {
+    console.log(`Send Text ${text}`);
+    const issues = await this.textCheckerService.checkMistakes(text);
+    console.debug('Issues :', issues);
+
+    let parsedJson;
+    try {
+      parsedJson = JSON.parse(issues);
+    } catch (e) {
+      console.error('Error parsing: ', e);
+    }
+    console.debug('Parsed issues :', parsedJson);
+
+    console.debug('Parsed issues.matches :', parsedJson.matches);
+    await this.updateUI(text, parsedJson.matches);
   }
 
   updateUI(fullText: string, issues: SuggestionData[]) {
@@ -134,43 +231,40 @@ export class TextCheckerComponent implements AfterViewInit, OnInit, OnDestroy {
 
     const itemIdx = 0;
     this.counterComponents = 0;
-    if (!issues || issues.length === 0)
-      return this.textCheckerService.escapeHtml(fullText);
+    if (!issues) return this.textCheckerService.escapeHtml(fullText);
 
     const resultText = '';
     let lastIndex = 0;
 
     issues.forEach((issue) => {
-      const { offset, length } = issue;
+      const { start, end } = issue;
 
       console.log(`LIDX: ${lastIndex}`);
-      if (lastIndex != offset) {
+      if (lastIndex != start) {
         this.createNewComponent(
-          this.textCheckerService.escapeHtml(fullText.slice(lastIndex, offset)),
+          this.textCheckerService.escapeHtml(fullText.slice(lastIndex, start)),
           null,
         );
-        // resultText += `<span>${this.writeService.escapeHtml(fullText.slice(lastIndex, offset))}</span>`;
-        lastIndex = offset;
+        // resultText += `<span>${this.writeService.escapeHtml(fullText.slice(lastIndex, start))}</span>`;
+        lastIndex = start;
         console.log(`LIDX: ${lastIndex}`);
 
         this.createNewComponent(
-          this.textCheckerService.escapeHtml(
-            fullText.slice(lastIndex, offset + length),
-          ),
+          this.textCheckerService.escapeHtml(fullText.slice(lastIndex, end)),
           issue,
         );
-        // resultText += `<span class="highlight">${this.writeService.escapeHtml(fullText.slice(lastIndex, offset + length))}</span>`;
-        lastIndex = offset + length;
+        // resultText += `<span class="highlight">${this.writeService.escapeHtml(fullText.slice(lastIndex, end))}</span>`;
+        lastIndex = end;
         console.log(`LIDX: ${lastIndex}`);
       } else {
         this.createNewComponent(
           this.textCheckerService.escapeHtml(
-            fullText.slice(lastIndex, lastIndex + length),
+            fullText.slice(lastIndex, lastIndex + (end - start)),
           ),
           issue,
         );
         // resultText += `<span class="highlight">${this.writeService.escapeHtml(fullText.slice(lastIndex, lastIndex + length))}</span>`;
-        lastIndex += length;
+        lastIndex += end - start;
         console.log(`lastIndex: ${lastIndex}`);
       }
     });
@@ -183,6 +277,9 @@ export class TextCheckerComponent implements AfterViewInit, OnInit, OnDestroy {
     // resultText += fullText.slice(lastIndex);
     lastIndex += fullText.length;
 
+    // this.textChecker.element.nativeElement = UtilHelper.applyStyles(this.textChecker.element.nativeElement, this.clonedStyle);
+    // this.textChecker.element.nativeElement.styleMap = this.clonedStyle;
+    // UtilHelper.cloneTextareaStyle
     this.textChecker.element.nativeElement = UtilHelper.cloneTextareaStyle(
       this.textElement,
       this.textChecker.element.nativeElement,
@@ -208,7 +305,6 @@ export class TextCheckerComponent implements AfterViewInit, OnInit, OnDestroy {
     const hostElement = componentRef.location.nativeElement;
     this.textChecker.element.nativeElement.appendChild(hostElement);
     this.counterComponents++;
-    this.textCheckerService.setSelectedTextChecker(this.textChecker);
   }
 
   // create(innerHTML: string, isMistake: boolean) {

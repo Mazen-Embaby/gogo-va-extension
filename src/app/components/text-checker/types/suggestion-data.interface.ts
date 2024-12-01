@@ -1,14 +1,13 @@
 export default interface SuggestionData {
   message: string;
   
-  start?: number;
-  end?: number;
-  offset: number;
-  length: number;
+  start: number;
+  end: number;
+
 
 //   wrongText: string;
 //   correctText: string;
 
-  replacements?: {old: string, new: string}[];
+  replacements?: {oldValue: string, newValue: string};
 //   componentIdx: number; // span
 }

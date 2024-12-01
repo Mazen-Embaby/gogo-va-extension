@@ -17,22 +17,22 @@ export class GrammarMockService {
       matches:  [
         {
           message: 'Possible spelling mistake found.',
-          offset: 10,
-          length: 6,
-          replacements: [{ old: 'mistak',new: 'mistake' }],
+          start: 10,
+          end: 16,
+          replacements: { oldValue: 'mistak',newValue: 'mistake' },
         },
         {
           message: "Consider using 'is' instead of 'are' in this context.",
-          offset: 22,
-          length: 3,
-          replacements: [{ old: 'are', new: 'is' }],
+          start: 22,
+          end: 25,
+          replacements: { oldValue: 'are', newValue: 'is' },
         },
       ],
       // other improvements
     };
 
     const grammarIssues = mockGrammarIssues.matches.filter((issue) => {
-      return issue.offset + issue.length <= text.length;
+      return issue.end <= text.length;
     });
     return grammarIssues;
   }

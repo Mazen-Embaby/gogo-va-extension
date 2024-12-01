@@ -10,6 +10,7 @@ import { createCustomElement } from '@angular/elements';
 import { FabComponent } from './app/components/fab/fab.component';
 import { WriteAssistanceComponent } from './app/components/text-checker/write-assistance/write-assistance.component';
 import { TextCheckerComponent } from './app/components/text-checker/text-checker.component';
+import { WritingAssistanceComponent } from './app/components/writing-assistance/writing-assistance.component';
 
 createApplication()
   .then((app) => {
@@ -17,6 +18,11 @@ createApplication()
       injector: app.injector,
     });
     customElements.define('gogova-simple', simpleComponent);
+
+    const writingAssisComponent = createCustomElement(WritingAssistanceComponent, {
+      injector: app.injector,
+    });
+    customElements.define('gogova-writing-assistance', writingAssisComponent);
 
     const fabComponent = createCustomElement(FabComponent, {
       injector: app.injector,

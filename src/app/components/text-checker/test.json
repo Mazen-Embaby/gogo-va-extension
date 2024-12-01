@@ -1,0 +1,13 @@
+{
+    "matches": [
+      {
+        "message": "The word \"mistak\" appears to be a misspelling.",
+        "start": 11,
+        "end": 17,
+        "replacements": {
+          "oldValue": "mistak",
+          "newValue": "mistake"
+        }
+      }
+    ]
+  }

@@ -3,7 +3,7 @@
     <ng-content #textAreaRef></ng-content>
     <!-- <textarea style="position: relative;"></textarea> -->
 
-    <div #textChecker class="text-checker">
+    <div [contentEditable]="true" #textChecker  class="text-checker" [ngStyle]="shadowClone">
         <!-- <app-suggestion-highlight [inner]="'This is a mistak that are common.'" type="suggestion" ></app-suggestion-highlight> -->
     </div>
 

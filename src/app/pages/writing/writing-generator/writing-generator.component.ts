@@ -7,17 +7,20 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ChatService } from '../../services/chat.service';
+import { ChatService } from '../../../services/chat.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ConfirmationDialogComponent } from '../../components/dialog/confirmation-dialog/confirmation-dialog.component';
-import { ChatMessage } from '../../types/chat-message.interface';
+import { ConfirmationDialogComponent } from '../../../components/dialog/confirmation-dialog/confirmation-dialog.component';
+import { ChatMessage } from '../../../types/chat-message.interface';
 import { MatButton } from '@angular/material/button';
 import { MatRipple } from '@angular/material/core';
 import { MatChipsModule } from '@angular/material/chips';
+import { Router, RouterLink } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { WritingService } from 'src/app/services/writing.service';
 
 @Component({
-  selector: 'app-write',
+  selector: 'app-writing-generator',
   standalone: true,
   imports: [
     NgFor,
@@ -26,12 +29,14 @@ import { MatChipsModule } from '@angular/material/chips';
     MatButton,
     MatRipple,
     MatChipsModule,
+    MatIconModule,
+    RouterLink,
     NgIf,
   ],
-  templateUrl: './write.component.html',
-  styleUrl: './write.component.scss',
+  templateUrl: './writing-generator.component.html',
+  styleUrl: './writing-generator.component.scss'
 })
-export class WriteComponent {
+export class WritingGeneratorComponent {
   @ViewChild('writeWindow') private writeWindow!: ElementRef;
   form: FormGroup;
 
@@ -58,9 +63,9 @@ export class WriteComponent {
   }
   constructor(
     private fb: FormBuilder,
-    private chatService: ChatService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
+    private router: Router,
   ) {
     this.form = this.fb.group({
       userInput: [null, Validators.required],
@@ -113,63 +118,64 @@ export class WriteComponent {
       console.error('Please select the mandatory fields');
       return;
     }
-
-    this.form.disable();
-
-    let isMessagePushed = false;
+    
+    const isMessagePushed = false;
 
     const topic = this.form.get('userInput')?.value?.trim();
     const format = this.selectedFormatChip;
     const tone = this.selectedToneChip;
     const length = this.selectedLengthChip;
-    const text = this.writeTemplate(topic, format!, tone!, length!);
+    const prompt = this.writeTemplate(topic, format!, tone!, length!);
 
-    const sentMessage: ChatMessage = {
-      content: text,
-      role: 'user',
-    };
+    this.router.navigate(['/writing/details'], { queryParams: { prompt: prompt, name: topic } });
 
-    this.form.reset();
+    // const sentMessage: ChatMessage = {
+    //   content: text,
+    //   role: 'user',
+    // };
 
-    try {
-      const streamText = await this.chatService.streamText(text);
-      this.messages.push(sentMessage);
-      this.messages.push({
-        content: '',
-        role: 'assistant',
-        avatar: '🤖',
-      });
-      isMessagePushed = true;
+    // this.form.reset();
 
-      for await (const chunk of streamText.values()) {
-        // Do something with each chunk
-        console.debug(`Stream.. ${chunk}`);
+    // try {
+    //   const streamText = await this.chatService.streamText(text);
+    //   this.messages.push(sentMessage);
+    //   this.messages.push({
+    //     content: '',
+    //     role: 'assistant',
+    //     avatar: '🤖',
+    //     sanitizeHTML
+    //   });
+    //   isMessagePushed = true;
 
-        const sentMessage: ChatMessage = {
-          content: chunk,
-          role: 'assistant',
-          avatar: '🤖',
-        };
-        this.messages[this.messages.length - 1] = sentMessage;
-        this.scrollChatWindowToBottom();
+    //   for await (const chunk of streamText.values()) {
+    //     // Do something with each chunk
+    //     console.debug(`Stream.. ${chunk}`);
 
-        // this.currentStreamMessage!.content =
-        //   this.currentStreamMessage!.content + chunk;
-      }
-    } catch (error) {
-      // roll-back
-      if (isMessagePushed) {
-        this.messages.pop();
-        this.messages.pop();
-      }
-      const errorMessage: string =
-        error instanceof Error ? error.message : String(error);
+    //     const sentMessage: ChatMessage = {
+    //       content: chunk,
+    //       role: 'assistant',
+    //       avatar: '🤖',
+    //     };
+    //     this.messages[this.messages.length - 1] = sentMessage;
+    //     this.scrollChatWindowToBottom();
 
-      this.showSnackbar(errorMessage);
-      // this.scrollMainWindowToBottom(); // subscribe
-    }
+    //     // this.currentStreamMessage!.content =
+    //     //   this.currentStreamMessage!.content + chunk;
+    //   }
+    // } catch (error) {
+    //   // roll-back
+    //   if (isMessagePushed) {
+    //     this.messages.pop();
+    //     this.messages.pop();
+    //   }
+    //   const errorMessage: string =
+    //     error instanceof Error ? error.message : String(error);
 
-    this.form.enable();
+    //   this.showSnackbar(errorMessage);
+    //   // this.scrollMainWindowToBottom(); // subscribe
+    // }
+
+    // this.form.enable();
   }
 
   writeTemplate(

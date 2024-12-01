@@ -8,6 +8,7 @@ import 'deep-chat';
   templateUrl: './deep-chat.component.html',
   styleUrl: './deep-chat.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exportAs: 'app-deep-chat'
 })
 export class DeepChatComponent {
 

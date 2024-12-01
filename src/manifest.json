@@ -6,6 +6,7 @@
   "minimum_chrome_version": "131",
   "permissions": [
     "activeTab",
+    "tabs",
     "webNavigation",
     "storage",
     "scripting",
@@ -13,11 +14,9 @@
     "aiLanguageModelOriginTrial",
     "contextMenus"
   ],
-  "trial_tokens": [
-    "Atf3eoMmFTJMWArO2fFyCGkrRweQI4ePXhP428d1ovQozLhfW0HbaEQQDjeZHiMdQZGpZvhJaXDb6V0V+L3lmwcAAAB4eyJvcmlnaW4iOiJjaHJvbWUtZXh0ZW5zaW9uOi8vbGFkbmdvaGFvaWRwZ2dwY25tampuYmplbGNobm9oYmYiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElGb3JFeHRlbnNpb24iLCJleHBpcnkiOjE3NjA0ODYzOTl9"
-  ],
 
-  "host_permissions": ["http://*/*", "https://*/*"],
+
+  "host_permissions": ["*://*/*"],
 
   "web_accessible_resources": [
     {
@@ -28,7 +27,8 @@
         "runtime.js",
         "assets/**",
         "app/app.config",
-        "app/*"
+        "app/*",
+        "*"
       ],
       "matches": ["<all_urls>"]
     }
@@ -36,8 +36,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["app/content.js"],
-      "css": ["styles.css"] // Optionally include a global CSS file
+      "js": ["app/content.js"]
     }
   ],
   "background": {

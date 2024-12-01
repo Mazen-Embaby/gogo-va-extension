@@ -1,3 +1,4 @@
+
 // Allows users to open the side panel by clicking on the action toolbar icon
 chrome.sidePanel
   .setPanelBehavior({ openPanelOnActionClick: true })
@@ -23,6 +24,31 @@ chrome.sidePanel
 chrome.runtime.onInstalled.addListener(() => {
   console.log('Hello World Side Panel extension installed');
 });
+
+chrome.tabs.onActivated.addListener((activeInfo) => {
+  showSummary(activeInfo.tabId);
+});
+chrome.tabs.onUpdated.addListener(async (tabId) => {
+  showSummary(tabId);
+});
+
+async function showSummary(tabId: number) {
+  const tab = await chrome.tabs.get(tabId);
+  try {
+  if (tab && tab.url?.startsWith('http')){
+    const injection = await chrome.scripting.executeScript({
+      target: { tabId },
+      files: ['extract-content.js']
+    });
+    chrome.storage.session.set({ pageContent: injection[0].result });
+  }
+}
+catch(err){
+  console.log(`Error ${err}`);
+}
+  return;
+}
+
 
 // Listener for messages from content or popup scripts
 // chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -55,6 +81,14 @@ function setupContextMenu(): void {
     type: 'normal',
     contexts: ['selection'],
   });
+  
+
+  chrome.contextMenus.create({
+    id: 'va-elaborate',
+    parentId: 'va-action',
+    title: 'Elaborate',
+    contexts: ['selection'],
+  });
 
   chrome.contextMenus.create({
     id: 'va-summarize',
@@ -84,12 +118,28 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 // Listener for when a context menu item is clicked
-chrome.contextMenus.onClicked.addListener((data, tab) => {
-  if (data.selectionText) {
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+
+  if (info.selectionText) {
     // Store the last word in chrome.storage.session.
-    chrome.storage.session.set({ lastWord: data.selectionText });
+    chrome.storage.session.set({ type: info.menuItemId , data: info.selectionText });
 
     // Ensure the side panel is open for the current tab.
     chrome.sidePanel.open({ tabId: tab!.id! });
+
+    // Add delay to make the angular catch up with send message!
+    setTimeout(() => {
+      chrome.runtime.sendMessage({ type: info.menuItemId, data: info.selectionText }, (response) => {
+        if (chrome.runtime.lastError) {
+          console.error('Runtime error:', chrome.runtime.lastError);
+        } else {
+          console.log('Response:', response);
+        }
+      });
+    }, 500); 
+
+
+
   }
 });
+

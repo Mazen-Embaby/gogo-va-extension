@@ -1,0 +1,70 @@
+<div class="flex-1 p-2 sm:p-4 flex flex-col text-left h-full">
+
+    <div class="flex sm:items-center py-3 space-x-2 border-b-2 border-gray-200">
+        <button type="button" routerLink="/summary/history"
+            class="inline-flex items-center justify-center rounded-lg border h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+            aria-label="Search">
+            <mat-icon>search</mat-icon>
+        </button>
+        <button type="button" routerLink="/summary/history"
+            class="inline-flex items-center justify-center rounded-lg border h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+            aria-label="history">
+            <mat-icon>history</mat-icon>
+        </button>
+    </div>
+
+
+    <form #summaryWindow class=" flex flex-col rounded-lg  h-full justify-between bg-background space-y-3"
+        [formGroup]="form" (ngSubmit)="sendMessage()">
+        <div>
+            <textarea formControlName="userInput" (input)="sendMessage()"
+                class="flex min-h-[130px]  w-full  rounded-md border border-input bg-transparent px-3 py-2 mb-5 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                autocomplete="off" name="message" placeholder="Write the text you want to summarize ..."
+                (keydown)="onKeydown($event)">
+            </textarea>
+
+
+            <p class="text-sm ">🤔 Summarization Type: </p>
+            <mat-chip-listbox #toneList aria-label="Single selection chip list" [multiple]="false" [selectable]="false">
+                <mat-chip-option *ngFor="let chip of summaryChips" [selected]="chip===selectedSummaryChip"
+                    (click)="selectSummaryChip(chip)">
+                    {{ chip.title }}
+                </mat-chip-option>
+            </mat-chip-listbox>
+
+            <p class="text-sm">🕮 Format: </p>
+            <mat-chip-listbox #formatList aria-label="Single selection chip list" [multiple]="false"
+                [selectable]="false">
+                <mat-chip-option *ngFor="let chip of formatChips" [selected]="chip === selectedFormatChip"
+                    (click)="selectFormatChip(chip)">
+                    {{ chip.title }}
+                </mat-chip-option>
+            </mat-chip-listbox>
+
+            <p class="text-sm">📝 Length: </p>
+            <mat-chip-listbox #lengthList aria-label="Single selection chip list" [multiple]="false"
+                [selectable]="false">
+                <mat-chip-option *ngFor="let chip of lengthChips" [selected]="chip === selectedLengthChip"
+                    (click)="selectLengthChip(chip)">
+                    {{ chip.title }}
+                </mat-chip-option>
+            </mat-chip-listbox>
+
+            <!-- Summarized Text Output -->
+            <div class="flex flex-col mt-5 h-full">
+                <label for="summarizedText" class="text-sm font-medium text-gray-700 mb-2">Summarized Text</label>
+                <div [innerHTML]="summarizedText" id="summarizedText"
+                    class="overflow-auto h-full p-4 border border-gray-300 rounded-md  scroll-m-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    readonly placeholder="Summarization will appear here...">
+                </div>
+            </div>
+        </div>
+
+        <!-- <button
+            [disabled]="form.invalid || form.disabled || !selectedFormatChip || !selectedLengthChip || !selectedToneChip"
+            class=" custom-send-button" [color]="'#00ffff'" mat-stroked-button>Send
+        </button> -->
+
+    </form>
+
+</div>

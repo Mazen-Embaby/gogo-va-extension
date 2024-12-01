@@ -36,14 +36,21 @@ export class SidebarComponent implements AfterViewInit {
     {
       id: 2,
       name: 'Write',
-      link: 'write',
+      link: 'writing',
       icon: 'edit_square',
       children: [],
     },
     {
       id: 3,
+      name: 'Summ..',
+      link: 'summary',
+      icon: 'summarize',
+      children: [],
+    },
+    {
+      id: 4,
       name: 'Trans',
-      link: 'translate',
+      link: 'translation',
       icon: 'translate',
       isOpen: false,
       children: [],

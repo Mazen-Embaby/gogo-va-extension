@@ -1,1 +1,23 @@
 <p>translate works!</p>
+<app-text-checker>
+    <textarea></textarea>
+</app-text-checker>
+
+
+<app-suggestion-card></app-suggestion-card>
+
+<ng-lottie [options]="options" (animationCreated)="animationCreated($event)" />
+<div class="flex flex-col space-y-4">
+    <button (click)="getStorage()">getStorage</button>
+
+    <button (click)="createChat()">createChat</button>
+    <button (click)="newChat()">random</button>
+
+    
+    <button (click)="delete()">delete</button>
+    
+    <button (click)="update()">update</button>
+    <button (click)="newChat()">newChat</button>
+
+
+</div>

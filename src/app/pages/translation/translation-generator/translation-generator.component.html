@@ -1,0 +1,68 @@
+<div class="flex-1 p-2 sm:p-6 flex flex-col text-left h-full">
+
+    <div class="flex flex-row items-start space-x-3 border-b-2 p-1">
+        <mat-icon class="text-indigo-500 -mt-1" fontIcon="language"> </mat-icon>
+        <p class="text-sm p-0 font-medium text-gray-700 dark:text-gray-400">
+            Translation
+        </p>
+    </div>
+
+    <!-- Language Selection -->
+    <div class="space-y-6 pt-3">
+
+        <form #writeWindow class=" flex flex-col rounded-lg  h-full justify-between bg-background space-y-3"
+            [formGroup]="form" (ngSubmit)="sendMessage()">
+
+            <div class="flex flex-row items-center space-x-3  ">
+
+                <div class="flex flex-col">
+                    <label for="sourceLanguage" class="text-sm font-medium text-gray-700 mb-2">From:</label>
+                    <select  (change)="sendMessage()" formControlName="fromLang"
+                        class="w-30 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option class="w-30 min-w-30" *ngFor="let lang of sourceLanguages" class="w-full"
+                            [value]="lang.code">
+                            {{lang.name}}</option>
+                    </select>
+                </div>
+
+                <mat-icon class="mt-8 text-green-500">
+                    arrow_forward
+                </mat-icon>
+
+                <div class="flex flex-col">
+                    <label for="targetLanguage" class="text-sm font-medium text-gray-700 mb-2">To:</label>
+                    <select (change)="sendMessage()" formControlName="toLang"
+                        class="w-30 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option class="w-30 min-w-30" *ngFor="let lang of targetLanguages" class="w-full"
+                            [value]="lang.code">
+                            {{lang.name}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Input Text -->
+            <div class="flex flex-col relative">
+                <div class="flex flex-row  space-x-1">
+                    <label for="textInput" class=" text-sm font-medium text-gray-700 mb-2">Enter Text to
+                        Translate</label>
+                    <p class="text-sm  text-indigo-500 mb-2">({{detectedLanguage}} detected)</p>
+                </div>
+                <textarea (input)="sendMessage()" formControlName="userInput"
+                    class="relative p-4 border w-full border-gray-300 rounded-md h-32 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Type your text here...">
+                </textarea>
+                <span class="absolute right-2 text-xs text-indigo-700 bottom-2 z-20">({{detectedLanguage}})</span>
+            </div>
+
+            <!-- Translated Text Output -->
+            <div class="flex flex-col mt-6">
+                <label for="translatedText" class="text-sm font-medium text-gray-700 mb-2">Translated Text</label>
+                <div [innerHTML]="translatedText" id="translatedText"
+                    class="p-4 border border-gray-300 rounded-md h-32 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    readonly placeholder="Translation will appear here...">
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

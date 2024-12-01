@@ -1,34 +1,36 @@
-<div class="max-w-sm p-0 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-
-    <div class="flex p-3 flex-row space-x-1 items-end justify-items-start ">
-
-        <img class="mb-3 w-4 h-4" src="assets/images/icon32.png" />
-        <!-- <img class="mb-3 w-4 h-4" [src]="getImg('/assets/images/icon32.png')" /> -->
-
+<div style="max-width: 24rem; padding: 1rem; background-color: #ffffff; border: 1px solid #d1d5db; border-radius: 0.75rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.2s ease;">
+    <!-- Header Section -->
+    <div style="display: flex; padding-bottom: 0.5rem; flex-direction: row; gap: 0.5rem; align-items: flex-start; border-bottom: 1px solid #e5e7eb;">
+        <!-- Icon -->
+        <!-- <img style="width: 1.5rem; height: 1.5rem;" src="assets/images/icon32.png" alt="Icon" /> -->
         
-        <p class="  text-sm text-gray-500 dark:text-gray-400">
-            @if (info){
-            {{info!.message}}
-            }
-            <!-- Spelling Error {{info.message!}} -->
-        </p>
-    </div>
-    <div (click)="doCorrection()" style="cursor: pointer ;"
-        class="flex text-wrap text-left justify-center justify-items-center space-x-1 items-center hover:bg-slate-100">
-        <p class="underline-text text-wrap">
-            @if (info?.replacements){
-            {{getOldVal()}}
-            }
-        </p>
-
-        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg>
-
-
-        <p class="text-green-600">
-            @if (info?.replacements){
-            {{getNewVal()}}
+        <!-- Message -->
+        <p style="font-size: 0.9rem; color: #4b5563; margin: 0;">
+            @if (info) {
+                ❗{{ info!.message }}
             }
         </p>
     </div>
 
+    <!-- Content Section -->
+    <div (click)="doCorrection()" style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem; padding-top: 0.75rem; transition: background-color 0.2s ease;">
+        <!-- Old Value -->
+        <p style="font-size: 1rem; text-decoration: underline; text-decoration-color: #dc2626; color: #9ca3af; margin: 0; word-wrap: break-word;">
+            @if (info?.replacements) {
+            {{ getOldVal() }}
+            }
+        </p>
+
+        <!-- SVG Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#6b7280">
+            <path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z" />
+        </svg>
+
+        <!-- New Value -->
+        <p style="font-size: 1rem; font-weight: 500; color: #10b981; margin: 0;">
+            @if (info?.replacements) {
+            {{ getNewVal() }}
+            }
+        </p>
+    </div>
 </div>

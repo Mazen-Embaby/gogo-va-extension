@@ -35,7 +35,7 @@ export class SuggestionHighlightComponent {
 
   constructor(
     private viewContainer: ViewContainerRef,
-    private writeService: TextCheckerService,
+    private textCheckService: TextCheckerService,
   ) {}
 
   // @HostListener('mouseenter') onMouseEnter() {
@@ -66,9 +66,9 @@ export class SuggestionHighlightComponent {
   mouseOver() {
     if (this.infor) {
       console.debug(
-        `mouseOver\nmessage:${this.infor.message}\noffset:${this.infor.offset}\nlength:${this.infor.length}\nreplacement:${this.infor.replacements}`,
+        `mouseOver\nmessage:${this.infor.message}\nstart:${this.infor.start}\nend:${this.infor.end}\nreplacement:${this.infor.replacements}`,
       );
-      this.writeService.selectedSuggestion$.next(this.infor);
+      this.textCheckService.selectedSuggestion$.next(this.infor);
       this.trigger.openMenu();
     }
   }

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Writing Improvement Suggestions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 800px;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      color: #333;
+    }
+
+    .textarea-container {
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      resize: vertical;
+    }
+
+    .suggestions-container {
+      margin-top: 20px;
+    }
+
+    .suggestion-item {
+      background-color: #f9f9f9;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .suggestion-item p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .suggestion-item button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .suggestion-item button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Writing Improvement Suggestions</h1>
+
+    <div class="textarea-container">
+      <textarea id="userText" placeholder="Write or paste your text here..."></textarea>
+    </div>
+
+    <div class="suggestions-container" id="suggestions">
+      <div class="suggestion-item">
+        <p><strong>Suggestion 1:</strong> Consider using simpler words to improve readability.</p>
+        <button onclick="applySuggestion(1)">Apply Suggestion</button>
+      </div>
+      <div class="suggestion-item">
+        <p><strong>Suggestion 2:</strong> Avoid using passive voice in most sentences.</p>
+        <button onclick="applySuggestion(2)">Apply Suggestion</button>
+      </div>
+      <div class="suggestion-item">
+        <p><strong>Suggestion 3:</strong> Break long sentences into shorter ones for clarity.</p>
+        <button onclick="applySuggestion(3)">Apply Suggestion</button>
+      </div>
+      <div class="suggestion-item">
+        <p><strong>Suggestion 4:</strong> Check for spelling and grammar mistakes.</p>
+        <button onclick="applySuggestion(4)">Apply Suggestion</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Example suggestion application function
+    function applySuggestion(suggestionId) {
+      const textArea = document.getElementById("userText");
+      let updatedText = textArea.value;
+
+      // Suggestion 1: Use simpler words (for demo purposes, replacing "utilize" with "use")
+      if (suggestionId === 1) {
+        updatedText = updatedText.replace(/\butilize\b/g, "use");
+      }
+
+      // Suggestion 2: Passive voice check (this is just an example for demonstration)
+      if (suggestionId === 2) {
+        updatedText = updatedText.replace(/is being/g, "is");
+      }
+
+      // Suggestion 3: Break long sentences (simplified example)
+      if (suggestionId === 3) {
+        updatedText = updatedText.replace(/, and/g, ".");
+      }
+
+      // Suggestion 4: Check for spelling and grammar mistakes (not fully functional)
+      if (suggestionId === 4) {
+        alert("Please run a spell check or grammar checker for this suggestion.");
+      }
+
+      // Update the text area with the modified content
+      textArea.value = updatedText;
+    }
+  </script>
+
+</body>
+</html>

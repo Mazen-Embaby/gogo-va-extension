@@ -1,0 +1,67 @@
+<div class="flex-1 p-2 sm:p-6 flex flex-col justify-between h-full">
+    <div class="space-y-2">
+        <!-- Header Section -->
+        <div class="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
+            <p class="text-sm p-0 impo font-medium text-gray-700 dark:text-gray-400">
+                📘 {{ currentConversation.name | titlecase | truncate: 28 }}
+            </p>
+            <div class="flex items-center space-x-2">
+                <button class="text-gray-500 transition duration-75 dark:text-gray-400 dark:group-hover:text-white"
+                    mat-icon-button routerLink="/translation">
+                    <mat-icon fontIcon="close">close</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <div id="messages" #chatWindow
+            class="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
+            <!-- Loop through messages here -->
+            <div class="chat-message" *ngFor="let message of currentConversation.messages">
+                <div class="flex items-end" [ngClass]="{
+            'justify-end': message.role === 'user',
+            'justify-start': message.role !== 'user',
+          }">
+                    <!-- Left-side icon for bot -->
+                    <div *ngIf="message.role !== 'user'"
+                        class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-600">
+                        🤖
+                    </div>
+
+                    <!-- Message Bubble -->
+                    <!-- Chat Bubble -->
+                    <div class="flex flex-col space-y-2 text-sm max-w-xs mx-2" [ngClass]="{
+              'items-end': message.role === 'user',
+              'items-start': message.role !== 'user',
+            }">
+                        <div class="p-3 rounded-2xl shadow" [ngClass]="
+                message.role === 'user'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-100 text-gray-800'
+              ">
+                            <span class="inline-block text-left">
+                                <div [innerHTML]="message.sanitizeHTML"></div>
+                                <!-- {{getMessage(message.content)  }} -->
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Right-side icon for user -->
+                    <div *ngIf="message.role === 'user'"
+                        class="w-8 h-8 items-center justify-center rounded-full hidden-on-small bg-gray-100 dark:bg-gray-600">
+                        <mat-icon
+                            class="text-sm text-gray-500 transition duration-75 dark:text-gray-400 dark:group-hover:text-white"
+                            fontIcon="person">
+                        </mat-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form class="relative rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring" [formGroup]="form"
+        (ngSubmit)="sendMessage()">
+        <textarea formControlName="userInput"
+            class="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            autocomplete="off" name="message" placeholder="Your message..." (keydown)="onKeydown($event)">
+    </textarea>
+    </form>
+</div>
