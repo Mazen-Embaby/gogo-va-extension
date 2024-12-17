@@ -1,26 +1,3 @@
-<!-- <button id="highlighter" (click)="highlightSelection()" [ngStyle]="markerStyle">
-    <svg
-      class="text-marker"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 544 512"
-    >
-      <path
-        d="M0 479.98L99.92 512l35.45-35.45-67.04-67.04L0 479.98zm124.61-240.01a36.592 36.592 0 0 0-10.79 38.1l13.05 42.83-50.93 50.94 96.23 96.23 50.86-50.86 42.74 13.08c13.73 4.2 28.65-.01 38.15-10.78l35.55-41.64-173.34-173.34-41.52 35.44zm403.31-160.7l-63.2-63.2c-20.49-20.49-53.38-21.52-75.12-2.35L190.55 183.68l169.77 169.78L530.27 154.4c19.18-21.74 18.15-54.63-2.35-75.13z"
-      ></path>
-    </svg>
-  </button>
-  <ng-template #highlightTemplate>
-    <span class="highlight" [style.background-color]="highlightColor" style="display: inline"></span>
-  </ng-template> -->
-
-
-
-<!-- <div #tabs class="tab">
-  <button class="tablinks" onclick="openCity(event, 'London')">London</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
-</div> -->
-
 
 <button class="fixed-button" (click)="toggleMenu()" [ngStyle]="{ display: markerStyle.display === 'none' ? 'block' : 'none' }">
   <!-- <i class="fas fa-arrow-up"></i> -->
@@ -58,41 +35,41 @@
         <div class="skill">
           <span class="skill-label">Formal</span>
           <div class="skill-bar-background">
-            <div class="skill-bar html" style="width: 90%"></div>
+            <div class="skill-bar html" [style.width.%]="languageTone.formal" ></div>
           </div>
-          <span class="skill-percentage">90%</span>
+          <span class="skill-percentage">{{languageTone.formal}}%</span>
         </div>
     
         <div class="skill">
           <span class="skill-label">Friendly</span>
           <div class="skill-bar-background">
-            <div class="skill-bar css" style="width: 80%"></div>
+            <div class="skill-bar css" [style.width.%]="languageTone.friendly"></div>
           </div>
-          <span class="skill-percentage">80%</span>
+          <span class="skill-percentage">{{languageTone.friendly}}%</span>
         </div>
 
         <div class="skill">
           <span class="skill-label">Simple</span>
           <div class="skill-bar-background">
-            <div class="skill-bar js" style="width: 70%"></div>
+            <div class="skill-bar js" [style.width.%]="languageTone.simple"></div>
           </div>
-          <span class="skill-percentage">70%</span>
+          <span class="skill-percentage">{{languageTone.simple}}%</span>
         </div>
     
         <div class="skill">
           <span class="skill-label">Clear</span>
           <div class="skill-bar-background">
-            <div class="skill-bar python" style="width: 75%"></div>
+            <div class="skill-bar python" [style.width.%]="languageTone.clear"></div>
           </div>
-          <span class="skill-percentage">75%</span>
+          <span class="skill-percentage">{{languageTone.clear}}%</span>
         </div>
       </div>
     </div>
 
+    <!-- Third tab -->
     <div *ngIf="activeTab === tabs[2].name" id="{{ tabs[2].name }}">
       <deep-chat
       demo="false"
-      textInput='ss'
       [history]="history"
     ></deep-chat>      
       

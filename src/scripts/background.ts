@@ -1,3 +1,4 @@
+import { isProbablyReaderable, Readability } from "@mozilla/readability";
 
 // Allows users to open the side panel by clicking on the action toolbar icon
 chrome.sidePanel
@@ -38,8 +39,11 @@ async function showSummary(tabId: number) {
   if (tab && tab.url?.startsWith('http')){
     const injection = await chrome.scripting.executeScript({
       target: { tabId },
-      files: ['extract-content.js']
+      files: ['scripts/extract-content.js']
     });
+    console.log(`Injection: ${injection[0]}`);
+
+      console.log(`set session storage: ${injection[0].result}`);
     chrome.storage.session.set({ pageContent: injection[0].result });
   }
 }
@@ -137,9 +141,8 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         }
       });
     }, 500); 
-
-
-
   }
 });
+
+
 

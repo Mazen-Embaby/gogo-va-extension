@@ -23,7 +23,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Conversation } from '../../../types/conversation.interface';
 import { ulid } from 'ulidx';
-// import * as marked from 'marked';
 import { MarkdownSanitizePipe } from 'src/app/pipes/markdown-sanitize.pipe';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';

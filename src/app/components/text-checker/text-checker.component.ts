@@ -11,6 +11,7 @@ import {
   ViewContainerRef,
   OnInit,
   OnDestroy,
+  ViewEncapsulation,
 } from '@angular/core';
 import { TextCheckerService } from './text-checker.service';
 import { GrammarMockService } from './text-checker.mock.service';
@@ -26,6 +27,7 @@ import { NgStyle } from '@angular/common';
   imports: [SuggestionHighlightComponent, NgStyle],
   templateUrl: './text-checker.component.html',
   styleUrl: './text-checker.component.scss',
+  encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class TextCheckerComponent implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild('divRef') private divRef!: ElementRef;

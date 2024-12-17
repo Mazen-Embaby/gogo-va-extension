@@ -1,4 +1,3 @@
-// import { isProbablyReaderable, Readability } from '@mozilla/readability';
 
 //// --------------------- Start Helper Functions ----------------------   ////
 function injectComponentToHTML(
@@ -45,20 +44,6 @@ function getSpecificStyles(element: HTMLElement, properties: any[]) {
   return styleMap;
 }
 
-// function canBeParsed(document: Document) {
-//   return isProbablyReaderable(document, {
-//     minContentLength: 100,
-//   });
-// }
-
-// function parse(document: Document) {
-//   if (!canBeParsed(document)) {
-//     return false;
-//   }
-//   const documentClone = document.cloneNode(true) as Document;
-//   const article = new Readability(documentClone).parse();
-//   return article!.textContent;
-// }
 
 //////////////////  End Helper Functions //////////////////////
 
@@ -170,8 +155,3 @@ document.addEventListener('focusout', (event) => {
   }
 });
 
-// const x = parse(window.document);
-// console.log(`XX, ${x} `)
-
-// document.addEventListener("onload", inject);
-// window.onload = inject;

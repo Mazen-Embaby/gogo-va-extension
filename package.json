@@ -13,7 +13,7 @@
     "test": "ng test",
     "watch:extension": "ng build --watch --output-hashing=none && tsc src/app/content.ts src/app/background.ts --outDir dist/chrome-extension/browser/app --watch",
     "copy-extract-content": "copy src\\app\\extract-content.js dist\\chrome-extension\\browser\\app\\extract-content.js",
-    "build:extension": "ng build --output-hashing=none && tsc src/app/content.ts src/app/background.ts --outDir dist/chrome-extension/browser/app && npm run copy-extract-content",
+    "build:extension": "ng build --output-hashing=none && node esbuild.config.js",
     "copy-assets": "rsync -av --exclude 'tsconfig.json' --exclude 'src' --exclude 'dist' ./dist/",
     "lint": "ng lint",
     "prepare": "husky install"
@@ -49,6 +49,7 @@
   "devDependencies": {
     "@angular-builders/custom-webpack": "^18.0.0",
     "@angular-devkit/build-angular": "^18.2.12",
+    "esbuild": "^0.24.0",
     "@angular/cli": "^18.2.12",
     "@angular/compiler-cli": "^18.2.0",
     "@mozilla/readability": "^0.5.0",

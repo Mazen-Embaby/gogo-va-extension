@@ -175,8 +175,8 @@ export class WritingService {
     }
   }
 
-  async promptText(text: string): Promise<any> {
-    if (!this.session) {
+  async promptText(text: string, session?: Session): Promise<any> {
+    if (!session) {
       await this.createSesssion();
     }
     const res = this.session!.prompt(text);

@@ -14,8 +14,9 @@
   },
   "files": [
     "src/main.ts",
-    "src/app/background.ts",
-    "src/app/content.ts"
+    "src/scripts/background.ts",
+    "src/scripts/content.ts",
+    "src/scripts/extract-content.ts"
   ],
   "include": [
     "src/**/*.d.ts"
