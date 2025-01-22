@@ -1,32 +1,41 @@
-# GogoVa
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+# GogoVA Chrome Extension 🚀
 
 
+
+## Inspiration
+
+GoGo VA is a chrome-extension was born out of the need for a tool that simplifies writing tasks while offering the power of advanced AI models. We wanted to create an AI assistant that works entirely offline, giving users privacy and efficiency, all without the need for an internet connection.
+
+## What it does
+
+GoGo VA revolutionizes the writing experience by offering powerful tools for prompt generation, translation, summarization, and more. Whether you're brainstorming ideas, translating text, or summarizing long documents, GoGo VA is designed to help you get your work done faster and more effectively—all from the comfort of your own device.
+
+## Key Features
+- 🛠️ **Vite**: for lightning-fast development and hot module replacement.
+
+- 🧰 **TypeScript**: for type safety and enhanced productivity.
+
+- ⚛️ **angular**: for building dynamic and interactive UI components.
+
+- 📦 **CRX**: custom element
+
+- 🎨 **Tailwind CSS**: for hassle-free styling, including seamless integration in content scripts.
+
+  🎨 **Angular Material**: for hassle-free styling, including seamless integration in content scripts.
+
+
+## Requirements
+
+🚍 Google Chrome Canary
+
+🔧 Enable & Download built-in chrome AI API [ prompt, summarize,  ]
+
+## Usage Instructions
+
+1. 📥 Clone the repository.
+2. 🔧 Install dependencies with `npm install`.
+3. 🚀 build the extension with `npm run build:extension`.
+4. 🏗️ In chrome select manage extension then load unpacked then the directory build.
 
 ## Development & Contribution
 
