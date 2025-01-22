@@ -2,6 +2,46 @@
 
 
 
+Check out this [YouTube video](https://www.youtube.com/watch?v=LS5fnL6I3X4).
+
+
+
+**prompt-chat**
+
+![Chat with](https://raw.githubusercontent.com/Mazen-Embaby/gogo-va-extension/refs/heads/main/screenshots/Screenshot%20from%202025-01-22%2009-44-35.png)
+
+
+
+**Chat History**
+
+![](https://raw.githubusercontent.com/Mazen-Embaby/gogo-va-extension/refs/heads/main/screenshots/Screenshot%20from%202025-01-22%2009-45-55.png)
+
+
+
+**Start to write Paragraph, Email, Comment, or Message**
+
+![](https://raw.githubusercontent.com/Mazen-Embaby/gogo-va-extension/refs/heads/main/screenshots/Screenshot%20from%202025-01-22%2009-46-05.png)
+
+
+
+**Start to summarize web content**
+
+![](https://raw.githubusercontent.com/Mazen-Embaby/gogo-va-extension/refs/heads/main/screenshots/Screenshot%20from%202025-01-22%2009-46-27.png)
+
+
+
+**Simultaneous translation**
+
+![](https://raw.githubusercontent.com/Mazen-Embaby/gogo-va-extension/refs/heads/main/screenshots/Screenshot%20from%202025-01-22%2009-46-41.png)
+
+
+
+**Writing Assistance**
+
+![](https://raw.githubusercontent.com/Mazen-Embaby/gogo-va-extension/refs/heads/main/screenshots/Screenshot%20from%202025-01-22%2009-47-25.png)
+
+
+
 ## Inspiration
 
 GoGo VA is a chrome-extension was born out of the need for a tool that simplifies writing tasks while offering the power of advanced AI models. We wanted to create an AI assistant that works entirely offline, giving users privacy and efficiency, all without the need for an internet connection.
