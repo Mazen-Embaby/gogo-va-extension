@@ -35,7 +35,7 @@
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
     "@webcomponents/custom-elements": "^1.6.0",
-    "ai": "^3.4.33",
+    "ai": "^4.1.26",
     "deep-chat": "^2.0.1",
     "dompurify": "^3.2.2",
     "lottie-web": "^5.12.2",
